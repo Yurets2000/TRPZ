@@ -95,28 +95,28 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="WpfMap.Model.ApplicationContext">
-    <Position X="30.75" Y="6.25" Width="1.5" />
+    <Position X="30.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\ApplicationContext.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfMap.Model.Utils">
-    <Position X="33.25" Y="6.25" Width="1.5" />
+    <Position X="33.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Utils.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfMap.App" Collapsed="true">
-    <Position X="37.75" Y="8.25" Width="1.5" />
+    <Position X="37.75" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>App.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfMap.AdminPage" BaseTypeListCollapsed="true">
-    <Position X="9.75" Y="6.25" Width="1.5" />
+    <Position X="9.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\Admin\AdminPage.xaml.cs</FileName>
@@ -124,7 +124,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.CityManager" BaseTypeListCollapsed="true">
-    <Position X="15.5" Y="6.25" Width="1.5" />
+    <Position X="15.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAQAAAAIAAAAAAAAEACAAAAAgAAAAEAgAAAAAAAAAA=</HashCode>
       <FileName>Views\Admin\CityManager.xaml.cs</FileName>
@@ -135,7 +135,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.CountryManager" BaseTypeListCollapsed="true">
-    <Position X="12.25" Y="6.25" Width="1.5" />
+    <Position X="12.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAIAAAAAADAABgAAAAAAAAAAgAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Views\Admin\CountryManager.xaml.cs</FileName>
@@ -146,7 +146,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.HouseManager" BaseTypeListCollapsed="true">
-    <Position X="22" Y="6.25" Width="1.5" />
+    <Position X="22" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAEAAAAQAAAAAAAAAAAAAgCAAAAAAAAAACBAAAA=</HashCode>
       <FileName>Views\Admin\HouseManager.xaml.cs</FileName>
@@ -157,7 +157,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.ResidentManager" BaseTypeListCollapsed="true">
-    <Position X="27.75" Y="6.25" Width="1.5" />
+    <Position X="27.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAACAQAAAAAAAAAAIAAAAAAAAgAAAgAAAAABAAAAAAA=</HashCode>
       <FileName>Views\Admin\ResidentManager.xaml.cs</FileName>
@@ -168,7 +168,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.RoomManager" BaseTypeListCollapsed="true">
-    <Position X="25" Y="6.25" Width="1.5" />
+    <Position X="25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAQAAAIAAAAAAAACAAAAgAAAAAAAAEACQAAAAA=</HashCode>
       <FileName>Views\Admin\RoomManager.xaml.cs</FileName>
@@ -179,7 +179,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.StreetManager" BaseTypeListCollapsed="true">
-    <Position X="18.5" Y="6.25" Width="1.5" />
+    <Position X="18.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAEAAAAAAAAAAARAAAAgAAAAAAAAAAAAACACQ=</HashCode>
       <FileName>Views\Admin\StreetManager.xaml.cs</FileName>
@@ -190,10 +190,10 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.MainWindow" BaseTypeListCollapsed="true">
-    <Position X="37" Y="20.5" Width="1.5" />
+    <Position X="37" Y="19.5" Width="1.5" />
     <AssociationLine Name="_repository" Type="WpfMap.Model.Repositories.UserRepository" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="37.75" Y="20.5" />
+        <Point X="37.75" Y="19.5" />
         <Point X="37.75" Y="17.375" />
         <Point X="36.25" Y="17.375" />
       </Path>
@@ -208,7 +208,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.CityPage" BaseTypeListCollapsed="true">
-    <Position X="21.75" Y="21.5" Width="1.5" />
+    <Position X="21.75" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAEAAAAAQCAAA=</HashCode>
       <FileName>Views\User\CityPage.xaml.cs</FileName>
@@ -222,7 +222,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.CountryPage" BaseTypeListCollapsed="true">
-    <Position X="17.75" Y="21.5" Width="1.5" />
+    <Position X="17.75" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQBAEAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
       <FileName>Views\User\CountryPage.xaml.cs</FileName>
@@ -236,7 +236,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.HousePage" BaseTypeListCollapsed="true">
-    <Position X="28" Y="21.5" Width="1.5" />
+    <Position X="28" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAABAAAAAAAAAAAEAAAAAACAAAAAA=</HashCode>
       <FileName>Views\User\HousePage.xaml.cs</FileName>
@@ -250,7 +250,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.ResidentPage" BaseTypeListCollapsed="true">
-    <Position X="33.75" Y="21.5" Width="1.5" />
+    <Position X="33.75" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\User\ResidentPage.xaml.cs</FileName>
@@ -261,18 +261,18 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.RoomPage" BaseTypeListCollapsed="true">
-    <Position X="31.25" Y="21.5" Width="1.5" />
+    <Position X="31.25" Y="20.5" Width="1.5" />
     <AssociationLine Name="_room" Type="WpfMap.Model.DTO.Room" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="31.5" Y="21.5" />
-        <Point X="31.5" Y="21.125" />
-        <Point X="29.156" Y="21.125" />
+        <Point X="31.5" Y="20.5" />
+        <Point X="31.5" Y="20.125" />
+        <Point X="29.156" Y="20.125" />
         <Point X="29.156" Y="14.526" />
       </Path>
     </AssociationLine>
     <AssociationLine Name="_selection" Type="WpfMap.Model.DTO.Resident" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="32.062" Y="21.5" />
+        <Point X="32.062" Y="20.5" />
         <Point X="32.062" Y="15.362" />
       </Path>
     </AssociationLine>
@@ -289,12 +289,12 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.StreetPage" BaseTypeListCollapsed="true">
-    <Position X="25.25" Y="21.5" Width="1.5" />
+    <Position X="25.25" Y="20.5" Width="1.5" />
     <AssociationLine Name="_street" Type="WpfMap.Model.DTO.Street" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="25.562" Y="21.5" />
-        <Point X="25.562" Y="21.125" />
-        <Point X="23.094" Y="21.125" />
+        <Point X="25.562" Y="20.5" />
+        <Point X="25.562" Y="20.125" />
+        <Point X="23.094" Y="20.125" />
         <Point X="23.094" Y="14.526" />
       </Path>
     </AssociationLine>
@@ -311,10 +311,10 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.UserPage" BaseTypeListCollapsed="true">
-    <Position X="13.75" Y="21.5" Width="1.5" />
+    <Position X="13.75" Y="20.5" Width="1.5" />
     <AssociationLine Name="_selection" Type="WpfMap.Model.DTO.Country" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="14.75" Y="21.5" />
+        <Point X="14.75" Y="20.5" />
         <Point X="14.75" Y="13.234" />
         <Point X="15.75" Y="13.234" />
       </Path>
@@ -329,22 +329,22 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WpfMap.Properties.Resources">
-    <Position X="35.75" Y="6.25" Width="1.5" />
+    <Position X="35.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfMap.Properties.Settings">
-    <Position X="37.75" Y="6.25" Width="1.5" />
+    <Position X="37.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfMap.Views.Common.Registration" BaseTypeListCollapsed="true">
-    <Position X="39.75" Y="20.5" Width="1.5" />
+    <Position X="39.75" Y="19.5" Width="1.5" />
     <AssociationLine Name="_repository" Type="WpfMap.Model.Repositories.UserRepository" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="40.5" Y="20.5" />
+        <Point X="40.5" Y="19.5" />
         <Point X="40.5" Y="16.375" />
         <Point X="36.25" Y="16.375" />
       </Path>
