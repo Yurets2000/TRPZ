@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfMap.Helpers.Validators;
 using WpfMap.Model;
 using WpfMap.Model.DTO;
 using WpfMap.Model.Repositories;
@@ -21,6 +22,7 @@ namespace WpfMap
     public partial class CountryManager : Window
     {
         private CountryRepository _repository = CountryRepository.GetInstance();
+        private CountryManagerValidator _validator = new CountryManagerValidator();
 
         public CountryManager()
         {
@@ -30,7 +32,7 @@ namespace WpfMap
 
         private void AddCountry_Click(object sender, EventArgs e)
         {
-            if (IsDataValidForAddition())
+            if (_validator.IsDataValidForAddition(this))
             {
                 Country country = new Country
                 {
@@ -51,7 +53,7 @@ namespace WpfMap
             Country country = (Country)countrySelector.SelectedItem;
             if (country != null)
             {
-                if (IsDataValidForEdition())
+                if (_validator.IsDataValidForEdition(this))
                 {
                     country.Name = editCountryName.Text;
                     country.Capital = (City)editCapital.SelectedItem;
@@ -102,16 +104,6 @@ namespace WpfMap
             editCountryName.Text = country?.Name;
             editCapital.ItemsSource = country?.Cities;
             editCapital.SelectedItem = country?.Capital;
-        }
-
-        private bool IsDataValidForAddition()
-        {
-            return !string.IsNullOrEmpty(addCountryName.Text);
-        }
-
-        private bool IsDataValidForEdition()
-        {
-            return !string.IsNullOrEmpty(editCountryName.Text);
         }
     }
 }

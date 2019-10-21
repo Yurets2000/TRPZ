@@ -105,7 +105,7 @@
     <Position X="33.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\Utils.cs</FileName>
+      <FileName>Helpers\Utils.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WpfMap.App" Collapsed="true">
@@ -126,7 +126,7 @@
   <Class Name="WpfMap.CityManager" BaseTypeListCollapsed="true">
     <Position X="15.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAQAAAAIAAAAAAAAEACAAAAAgAAAAEAgAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAAAAIAAAAAAAAEACAAAAAAAAAAEAgAAAAAAAIAA=</HashCode>
       <FileName>Views\Admin\CityManager.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -137,7 +137,7 @@
   <Class Name="WpfMap.CountryManager" BaseTypeListCollapsed="true">
     <Position X="12.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAIAAAAAADAABgAAAAAAAAAAgAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAIAAAAAADAABgAAAAAAAAAAAAAAAAAAAAQAAAAIAA=</HashCode>
       <FileName>Views\Admin\CountryManager.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -148,7 +148,7 @@
   <Class Name="WpfMap.HouseManager" BaseTypeListCollapsed="true">
     <Position X="22" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAEAAAAQAAAAAAAAAAAAAgCAAAAAAAAAACBAAAA=</HashCode>
+      <HashCode>IAAAAAEAAAAQAAAAAAAAAAAAAACAAAAAAAAAACBAIAA=</HashCode>
       <FileName>Views\Admin\HouseManager.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -159,7 +159,7 @@
   <Class Name="WpfMap.ResidentManager" BaseTypeListCollapsed="true">
     <Position X="27.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAACAQAAAAAAAAAAIAAAAAAAAgAAAgAAAAABAAAAAAA=</HashCode>
+      <HashCode>AAACAQAAAAAAAAAAIAAAAAAAAAAAAgAAAAABAAAAIAA=</HashCode>
       <FileName>Views\Admin\ResidentManager.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -170,7 +170,7 @@
   <Class Name="WpfMap.RoomManager" BaseTypeListCollapsed="true">
     <Position X="25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAQAAAIAAAAAAAACAAAAgAAAAAAAAEACQAAAAA=</HashCode>
+      <HashCode>AAAAAAAQAAAIAAAAAAAACAAAAAAAAAAAAAEACQAAIAA=</HashCode>
       <FileName>Views\Admin\RoomManager.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -181,7 +181,7 @@
   <Class Name="WpfMap.StreetManager" BaseTypeListCollapsed="true">
     <Position X="18.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAEAAAAAAAAAAARAAAAgAAAAAAAAAAAAACACQ=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAAAAAARAAAAAAAAAAAAAAAAAACICQ=</HashCode>
       <FileName>Views\Admin\StreetManager.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -358,5 +358,67 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
+  <Class Name="WpfMap.Helpers.Validators.BasicValidator">
+    <Position X="26" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAgAAgAAAAAAAAAAIAAABAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validators\BasicValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfMap.Helpers.Validators.CityManagerValidator" BaseTypeListCollapsed="true">
+    <Position X="29.5" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validators\CityManagerValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.Helpers.Validators.CountryManagerValidator" BaseTypeListCollapsed="true">
+    <Position X="27.75" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validators\CountryManagerValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.Helpers.Validators.HouseManagerValidator" BaseTypeListCollapsed="true">
+    <Position X="33" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validators\HouseManagerValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.Helpers.Validators.ResidentManagerValidator" BaseTypeListCollapsed="true">
+    <Position X="36.5" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validators\ResidentManagerValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.Helpers.Validators.RoomManagerValidator" BaseTypeListCollapsed="true">
+    <Position X="34.75" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validators\RoomManagerValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.Helpers.Validators.StreetManagerValidator" BaseTypeListCollapsed="true">
+    <Position X="31.25" Y="25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validators\StreetManagerValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="WpfMap.Helpers.Validators.IManagerValidator&lt;T&gt;">
+    <Position X="31.25" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validators\IManagerValidator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

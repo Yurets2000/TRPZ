@@ -70,6 +70,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\Validators\CityManagerValidator.cs" />
+    <Compile Include="Helpers\Validators\CountryManagerValidator.cs" />
+    <Compile Include="Helpers\Validators\HouseManagerValidator.cs" />
+    <Compile Include="Helpers\Validators\IManagerValidator.cs" />
+    <Compile Include="Helpers\Validators\BasicValidator.cs" />
+    <Compile Include="Helpers\Validators\ResidentManagerValidator.cs" />
+    <Compile Include="Helpers\Validators\RoomManagerValidator.cs" />
+    <Compile Include="Helpers\Validators\StreetManagerValidator.cs" />
     <Compile Include="Model\ApplicationContext.cs" />
     <Compile Include="Model\DTO\City.cs" />
     <Compile Include="Model\DTO\Country.cs" />
@@ -80,7 +88,7 @@
     <Compile Include="Model\DTO\User.cs" />
     <Compile Include="Model\Repositories\CountryRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
-    <Compile Include="Model\Utils.cs" />
+    <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Views\Admin\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>

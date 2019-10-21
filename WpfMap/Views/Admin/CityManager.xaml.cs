@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfMap.Helpers.Validators;
 using WpfMap.Model;
 using WpfMap.Model.DTO;
 
@@ -19,6 +20,7 @@ namespace WpfMap
     public partial class CityManager : Window
     {
         private Country _country;
+        private CityManagerValidator _validator = new CityManagerValidator();
 
         public CityManager(Country country)
         {
@@ -29,7 +31,7 @@ namespace WpfMap
 
         public void AddCity_Click(object sender, EventArgs e)
         {
-            if (IsDataValidForAddition())
+            if (_validator.IsDataValidForAddition(this))
             {
                 City city = new City
                 {
@@ -51,7 +53,7 @@ namespace WpfMap
             City city = (City)citySelector.SelectedItem;
             if (city != null)
             {
-                if (IsDataValidForEdition())
+                if (_validator.IsDataValidForEdition(this))
                 {
                     city.Name = editCityName.Text;
                     city.Area = float.Parse(editCityArea.Text);
@@ -101,20 +103,6 @@ namespace WpfMap
             City city = (City)citySelector.SelectedItem;
             editCityName.Text = city?.Name;
             editCityArea.Text = city?.Area.ToString("0.00");
-        }
-
-        public bool IsDataValidForAddition()
-        {
-            return !(string.IsNullOrEmpty(addCityName.Text) || 
-                     string.IsNullOrEmpty(addCityArea.Text) ||
-                     !float.TryParse(addCityArea.Text, out float f));
-        }
-
-        public bool IsDataValidForEdition()
-        {
-            return !(string.IsNullOrEmpty(editCityName.Text) ||
-                     string.IsNullOrEmpty(editCityArea.Text) ||
-                     !float.TryParse(editCityArea.Text, out float f));
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfMap.Helpers.Validators;
 using WpfMap.Model;
 using WpfMap.Model.DTO;
 
@@ -19,6 +20,7 @@ namespace WpfMap
     public partial class StreetManager : Window
     {
         private City _city;
+        private StreetManagerValidator _validator = new StreetManagerValidator();
 
         public StreetManager(City city)
         {
@@ -29,7 +31,7 @@ namespace WpfMap
 
         public void AddStreet_Click(object sender, EventArgs e)
         {
-            if (IsDataValidForAddition())
+            if (_validator.IsDataValidForAddition(this))
             {
                 Street street = new Street
                 {
@@ -50,7 +52,7 @@ namespace WpfMap
             Street street = (Street)streetSelector.SelectedItem;
             if (street != null)
             {
-                if (IsDataValidForEdition())
+                if (_validator.IsDataValidForEdition(this))
                 {
                     street.Name = editStreetName.Text;
                     Utils.RefreshComboBox(streetSelector);
@@ -98,16 +100,6 @@ namespace WpfMap
         {
             Street street = (Street)streetSelector.SelectedItem;
             editStreetName.Text = street?.Name;
-        }
-
-        public bool IsDataValidForAddition()
-        {
-            return !string.IsNullOrEmpty(addStreetName.Text);
-        }
-
-        public bool IsDataValidForEdition()
-        {
-            return !string.IsNullOrEmpty(editStreetName.Text);
         }
     }
 }

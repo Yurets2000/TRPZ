@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfMap.Helpers.Validators;
 using WpfMap.Model;
 using WpfMap.Model.DTO;
 
@@ -19,6 +20,7 @@ namespace WpfMap
     public partial class ResidentManager : Window
     {
         private Room _room;
+        private ResidentManagerValidator _validator = new ResidentManagerValidator();
 
         public ResidentManager(Room room)
         {
@@ -31,7 +33,7 @@ namespace WpfMap
 
         public void AddResident_Click(object sender, EventArgs e)
         {
-            if (IsDataValidForAddition())
+            if (_validator.IsDataValidForAddition(this))
             {
                 Resident resident = new Resident
                 {
@@ -55,7 +57,7 @@ namespace WpfMap
             Resident resident = (Resident)residentSelector.SelectedItem;
             if (resident != null)
             {
-                if (IsDataValidForEdition())
+                if (_validator.IsDataValidForEdition(this))
                 {
                     resident.Name = editResidentName.Text;
                     resident.Age = int.Parse(editResidentAge.Text);
@@ -97,28 +99,6 @@ namespace WpfMap
             editResidentGender.SelectedItem = resident?.Gender;
             editResidentPhone.Text = resident?.Phone;
             editResidentTime.Text = resident?.ResidenceTime.ToString();
-        }
-
-        public bool IsDataValidForAddition()
-        {
-            return !(string.IsNullOrEmpty(addResidentName.Text)||
-                     string.IsNullOrEmpty(addResidentAge.Text) ||
-                     !int.TryParse(addResidentAge.Text, out int n) ||
-                     string.IsNullOrEmpty(addResidentGender.Text) ||
-                     string.IsNullOrEmpty(addResidentPhone.Text) ||
-                     string.IsNullOrEmpty(addResidentTime.Text) ||
-                     !int.TryParse(addResidentTime.Text, out int n2));
-        }
-
-        public bool IsDataValidForEdition()
-        {
-            return !(string.IsNullOrEmpty(editResidentName.Text) ||
-                     string.IsNullOrEmpty(editResidentAge.Text) ||
-                     !int.TryParse(editResidentAge.Text, out int n) ||
-                     string.IsNullOrEmpty(editResidentGender.Text) ||
-                     string.IsNullOrEmpty(editResidentPhone.Text) ||
-                     string.IsNullOrEmpty(editResidentTime.Text) ||
-                     !int.TryParse(editResidentTime.Text, out int n2));
         }
     }
 }

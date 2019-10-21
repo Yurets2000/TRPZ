@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfMap.Helpers.Validators;
 using WpfMap.Model;
 using WpfMap.Model.DTO;
 
@@ -19,6 +20,7 @@ namespace WpfMap
     public partial class RoomManager : Window
     {
         private House _house;
+        private RoomManagerValidator _validator = new RoomManagerValidator();
 
         public RoomManager(House house)
         {
@@ -29,7 +31,7 @@ namespace WpfMap
 
         public void AddRoom_Click(object sender, EventArgs e)
         {
-            if (IsDataValidForAddition())
+            if (_validator.IsDataValidForAddition(this))
             {
                 Room room = new Room
                 {
@@ -51,7 +53,7 @@ namespace WpfMap
             Room room = (Room)roomSelector.SelectedItem;
             if (room != null)
             {
-                if (IsDataValidForEdition())
+                if (_validator.IsDataValidForEdition(this))
                 {
                     room.No = int.Parse(editRoomNo.Text);
                     room.Area = int.Parse(editRoomArea.Text);
@@ -101,22 +103,6 @@ namespace WpfMap
             Room room = (Room)roomSelector.SelectedItem;
             editRoomNo.Text = room?.No.ToString();
             editRoomArea.Text = room?.Area.ToString();
-        }
-
-        public bool IsDataValidForAddition()
-        {
-            return !(string.IsNullOrEmpty(addRoomArea.Text) ||
-                     string.IsNullOrEmpty(addRoomNo.Text) ||
-                     !int.TryParse(addRoomArea.Text, out int n) ||
-                     !int.TryParse(addRoomNo.Text, out int n2));
-        }
-
-        public bool IsDataValidForEdition()
-        {
-            return !(string.IsNullOrEmpty(editRoomArea.Text) ||
-                     string.IsNullOrEmpty(editRoomNo.Text) ||
-                     !int.TryParse(editRoomArea.Text, out int n) ||
-                     !int.TryParse(editRoomNo.Text, out int n2));
         }
     }
 }

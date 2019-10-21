@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfMap.Helpers.Validators;
 using WpfMap.Model;
 using WpfMap.Model.DTO;
 
@@ -19,6 +20,7 @@ namespace WpfMap
     public partial class HouseManager : Window
     {
         private Street _street;
+        private HouseManagerValidator _validator = new HouseManagerValidator();
 
         public HouseManager(Street street)
         {
@@ -29,7 +31,7 @@ namespace WpfMap
 
         public void AddHouse_Click(object sender, EventArgs e)
         {
-            if (IsDataValidForAddition())
+            if (_validator.IsDataValidForAddition(this))
             {
                 House house = new House
                 {
@@ -50,7 +52,7 @@ namespace WpfMap
             House house = (House)houseSelector.SelectedItem;
             if (house != null)
             {
-                if (IsDataValidForEdition())
+                if (_validator.IsDataValidForEdition(this))
                 {
                     house.Address = editHouseAddress.Text;
                     Utils.RefreshComboBox(houseSelector);
@@ -98,16 +100,6 @@ namespace WpfMap
         {
             House house = (House)houseSelector.SelectedItem;
             editHouseAddress.Text = house?.Address;
-        }
-
-        public bool IsDataValidForAddition()
-        {
-            return !string.IsNullOrEmpty(addHouseAddress.Text);
-        }
-
-        public bool IsDataValidForEdition()
-        {
-            return !string.IsNullOrEmpty(editHouseAddress.Text);
         }
     }
 }
