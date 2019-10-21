@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WpfMap.Model.DTO.City">
+    <Position X="18.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAAAAAAAAQgAAAAAQAAAAAAIEAAAAAAQAAAAA=</HashCode>
+      <FileName>Model\DTO\City.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Streets" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WpfMap.Model.DTO.Country">
+    <Position X="15.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAAAAAAAIgAAAAAQAAAAAAIkAAAAAAQAAAAA=</HashCode>
+      <FileName>Model\DTO\Country.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Capital" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Cities" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WpfMap.Model.DTO.House">
+    <Position X="25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAAAAAAAAAgAAAAAACAAAAAIECAAAAAAAAAAA=</HashCode>
+      <FileName>Model\DTO\House.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Rooms" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WpfMap.Model.DTO.Resident">
+    <Position X="31" Y="11.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="WpfMap.Model.DTO.Resident.Sex" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\DTO\Resident.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAACAgEAAAAQAAAIAAIEAAAAAIAAAAAA=</HashCode>
+      <FileName>Model\DTO\Resident.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfMap.Model.DTO.Room">
+    <Position X="28" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAgQAAAAAAACAAAIEAAAAAAQAAAAA=</HashCode>
+      <FileName>Model\DTO\Room.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Residents" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WpfMap.Model.DTO.Street">
+    <Position X="22" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAAAAAAAAAgAAAAAQAAAAAAIEAAAIAAAAAAAA=</HashCode>
+      <FileName>Model\DTO\Street.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Houses" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WpfMap.Model.DTO.User">
+    <Position X="34.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAgAAAAQAAAAAAAIECAAAQAAAAAAA=</HashCode>
+      <FileName>Model\DTO\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfMap.Model.Repositories.CountryRepository">
+    <Position X="15.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAABAAACAAAAAAQAABAAAAAAAAABEBAAAIAA=</HashCode>
+      <FileName>Model\Repositories\CountryRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Countries" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WpfMap.Model.Repositories.UserRepository">
+    <Position X="34.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAABAAAAAAAAAAAAgBAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Repositories\UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Users" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WpfMap.Model.ApplicationContext">
+    <Position X="30.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\ApplicationContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfMap.Model.Utils">
+    <Position X="33.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfMap.App" Collapsed="true">
+    <Position X="37.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfMap.AdminPage" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Admin\AdminPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.CityManager" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAQAAAAIAAAAAAAAEACAAAAAgAAAAEAgAAAAAAAAAA=</HashCode>
+      <FileName>Views\Admin\CityManager.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_country" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.CountryManager" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAIAAAAAADAABgAAAAAAAAAAgAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Views\Admin\CountryManager.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_repository" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.HouseManager" BaseTypeListCollapsed="true">
+    <Position X="22" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAEAAAAQAAAAAAAAAAAAAgCAAAAAAAAAACBAAAA=</HashCode>
+      <FileName>Views\Admin\HouseManager.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_street" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.ResidentManager" BaseTypeListCollapsed="true">
+    <Position X="27.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACAQAAAAAAAAAAIAAAAAAAAgAAAgAAAAABAAAAAAA=</HashCode>
+      <FileName>Views\Admin\ResidentManager.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_room" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.RoomManager" BaseTypeListCollapsed="true">
+    <Position X="25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAQAAAIAAAAAAAACAAAAgAAAAAAAAEACQAAAAA=</HashCode>
+      <FileName>Views\Admin\RoomManager.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_house" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.StreetManager" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAEAAAAAAAAAAARAAAAgAAAAAAAAAAAAACACQ=</HashCode>
+      <FileName>Views\Admin\StreetManager.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_city" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="37" Y="20.5" Width="1.5" />
+    <AssociationLine Name="_repository" Type="WpfMap.Model.Repositories.UserRepository" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="37.75" Y="20.5" />
+        <Point X="37.75" Y="17.375" />
+        <Point X="36.25" Y="17.375" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAEAAAAAAAAgAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Common\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_repository" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.CityPage" BaseTypeListCollapsed="true">
+    <Position X="21.75" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAEAAAAAQCAAA=</HashCode>
+      <FileName>Views\User\CityPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_city" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_selection" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.CountryPage" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQBAEAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Views\User\CountryPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_country" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_selection" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.HousePage" BaseTypeListCollapsed="true">
+    <Position X="28" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAABAAAAAAAAAAAEAAAAAACAAAAAA=</HashCode>
+      <FileName>Views\User\HousePage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_house" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_selection" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.ResidentPage" BaseTypeListCollapsed="true">
+    <Position X="33.75" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\User\ResidentPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_resident" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.RoomPage" BaseTypeListCollapsed="true">
+    <Position X="31.25" Y="21.5" Width="1.5" />
+    <AssociationLine Name="_room" Type="WpfMap.Model.DTO.Room" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="31.5" Y="21.5" />
+        <Point X="31.5" Y="21.125" />
+        <Point X="29.156" Y="21.125" />
+        <Point X="29.156" Y="14.526" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_selection" Type="WpfMap.Model.DTO.Resident" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="32.062" Y="21.5" />
+        <Point X="32.062" Y="15.362" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAgAAEAAAAAAAABA=</HashCode>
+      <FileName>Views\User\RoomPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_room" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_selection" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.StreetPage" BaseTypeListCollapsed="true">
+    <Position X="25.25" Y="21.5" Width="1.5" />
+    <AssociationLine Name="_street" Type="WpfMap.Model.DTO.Street" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="25.562" Y="21.5" />
+        <Point X="25.562" Y="21.125" />
+        <Point X="23.094" Y="21.125" />
+        <Point X="23.094" Y="14.526" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAACEACAAAAA=</HashCode>
+      <FileName>Views\User\StreetPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_street" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_selection" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.UserPage" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="21.5" Width="1.5" />
+    <AssociationLine Name="_selection" Type="WpfMap.Model.DTO.Country" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="14.75" Y="21.5" />
+        <Point X="14.75" Y="13.234" />
+        <Point X="15.75" Y="13.234" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAEAAAAAAAAAg=</HashCode>
+      <FileName>Views\User\UserPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_selection" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WpfMap.Properties.Resources">
+    <Position X="35.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfMap.Properties.Settings">
+    <Position X="37.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfMap.Views.Common.Registration" BaseTypeListCollapsed="true">
+    <Position X="39.75" Y="20.5" Width="1.5" />
+    <AssociationLine Name="_repository" Type="WpfMap.Model.Repositories.UserRepository" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="40.5" Y="20.5" />
+        <Point X="40.5" Y="16.375" />
+        <Point X="36.25" Y="16.375" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAABAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Common\Registration.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_repository" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,60 @@
+﻿<Window x:Class="WpfMap.HouseManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMap"
+        mc:Ignorable="d"
+        Title="HouseManager" Height="500" Width="640">
+    <Grid x:Name="LayoutRoot" Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320" />
+            <ColumnDefinition  />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Add House" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,10"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Address: " FontWeight="Medium" Margin="20,0,0,0"/>
+            <TextBox Name="addHouseAddress" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"/>
+            <Button Click="AddHouse_Click" Grid.Row="3" Grid.Column="1" Content="Add" Margin="0,0,20,0"/>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Edit/Delete House" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,10"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Select House: " FontWeight="Medium" Margin="20,0,0,0"/>
+            <ComboBox Name="houseSelector" ItemsSource="{Binding Houses}" DisplayMemberPath="Address" SelectionChanged="HouseSelector_SelectionChanged" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Address: " FontWeight="Medium" Margin="20,0,0,0"/>
+            <TextBox Name="editHouseAddress" Grid.Row="3" Grid.Column="1" Margin="0,0,20,0"/>
+            <Button Click="EditHouse_Click" Grid.Row="5" Grid.Column="1" Content="Edit" Margin="0,0,20,0"/>
+            <Button Click="DeleteHouse_Click" Grid.Row="7" Grid.Column="1" Content="Delete" Margin="0,0,20,0"/>
+            <Button Click="OpenRoomManager_Click" Grid.Row="9" Grid.Column="1" Content="Open Room Manager" Margin="0,0,20,0"/>
+        </Grid>
+    </Grid>
+</Window>
