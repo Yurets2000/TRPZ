@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:WpfMap.Resources">
+                    xmlns:local="clr-namespace:WpfMap">
     <Style x:Key="DefaultButtonStyle" TargetType="Button">
         <Setter Property="FontFamily" Value="Roboto"/>
         <Setter Property="BorderBrush" Value="LightBlue"/>
@@ -36,13 +36,5 @@
         <Setter Property="FontFamily" Value="Roboto"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="FontSize" Value="14"/>
-    </Style>
-    <Style x:Key="TextBoxInError" TargetType="TextBox">
-        <Style.Triggers>
-            <Trigger Property="Validation.HasError" Value="true">
-                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, 
-                    Path=(Validation.Errors)/ErrorContent}"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 </ResourceDictionary>

@@ -7,23 +7,27 @@ using WpfMap.Model.DTO;
 
 namespace WpfMap.Model.Repositories
 {
-    public class CountryRepository
+    public class ModelRepository
     {
-        public List<Country> Countries { get; private set; }
-        private static CountryRepository _repository;
+        public List<Country> Countries { get; private set; } = new List<Country>();
+        public List<City> Cities { get; private set; } = new List<City>();
+        public List<Street> Streets { get; private set; } = new List<Street>();
+        public List<House> Houses { get; private set; } = new List<House>();
+        public List<Room> Rooms { get; private set; } = new List<Room>();
+        public List<Resident> Residents { get; private set; } = new List<Resident>();
+        private static ModelRepository _repository;
 
-        public static CountryRepository GetInstance()
+        public static ModelRepository GetInstance()
         {
             if(_repository == null)
             {
-                _repository = new CountryRepository();
+                _repository = new ModelRepository();
             }
             return _repository;
         }
 
-        private CountryRepository()
+        private ModelRepository()
         {
-            Countries = new List<Country>();
             for(int i = 0; i < 10; i++)
             {
                 AddCountry(Countries, 15);
@@ -60,6 +64,7 @@ namespace WpfMap.Model.Repositories
                 AddStreet(city.Streets, 10);
             }
             cities.Add(city);
+            Cities.Add(city);
         }
 
         private void AddStreet(List<Street> streets, int housesCount)
@@ -75,6 +80,7 @@ namespace WpfMap.Model.Repositories
                 AddHouse(street.Houses, 5);
             }
             streets.Add(street);
+            Streets.Add(street);
         }
 
         private void AddHouse(List<House> houses, int roomsCount)
@@ -90,6 +96,7 @@ namespace WpfMap.Model.Repositories
                 AddRoom(house.Rooms, 3);
             }
             houses.Add(house);
+            Houses.Add(house);
         }
 
         private void AddRoom(List<Room> rooms, int residentsCount)
@@ -99,18 +106,19 @@ namespace WpfMap.Model.Repositories
             {
                 No = no,
                 Area = 50,
-                Residents = new List<Resident>()
+                RoomResidents = new List<RoomResident>()
             };
             for (int i = 0; i < residentsCount; i++)
             {
-                AddResident(room.Residents);
+                AddRoomResident(room.RoomResidents, room);
             }
             rooms.Add(room);
+            Rooms.Add(room);
         }
 
-        private void AddResident(List<Resident> residents)
+        private void AddRoomResident(List<RoomResident> roomResidents, Room room)
         {
-            int no = residents.Count + 1;
+            int no = roomResidents.Count + 1;
             Resident resident = new Resident
             {
                 Name = "Resident #" + no,
@@ -119,7 +127,14 @@ namespace WpfMap.Model.Repositories
                 Phone = "Phone #" + no,
                 ResidenceTime = no % 10
             };
-            residents.Add(resident);
+            Residents.Add(resident);
+
+            RoomResident roomResident = new RoomResident
+            {
+                Resident = resident,
+                Room = room
+            };
+            roomResidents.Add(roomResident);
         }
     }
 }

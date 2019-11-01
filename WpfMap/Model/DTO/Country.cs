@@ -9,6 +9,7 @@ namespace WpfMap.Model.DTO
     public class Country
     {
         private static int _idGenerator = 0;
+
         public int Id { get; private set; }
         public string Name { get; set; }
         public float Area

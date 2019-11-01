@@ -57,5 +57,10 @@ namespace WpfMap
             _selection.Sort((s1, s2) => s1.Name.CompareTo(s2.Name));
             streets.ItemsSource = _selection;
         }
+
+        private void FindStreet_Click()
+        {
+
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace WpfMap.Model.DTO
         public string Address { get; set; }
         public int Habitants
         {
-            get { return Rooms.Sum(room => room.Residents.Count); }
+            get { return Rooms.Sum(room => room.RoomResidents.Count); }
         }
         public List<Room> Rooms { get; set; }
 

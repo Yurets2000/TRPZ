@@ -23,7 +23,7 @@ namespace WpfMap
         public UserPage()
         {
             this.InitializeComponent();
-            this.DataContext = _selection = CountryRepository.GetInstance().Countries;
+            this.DataContext = _selection = ModelRepository.GetInstance().Countries;
             _selection.Sort((c1, c2) => c1.Name.CompareTo(c2.Name));
             countries.ItemsSource = _selection;
         }
@@ -47,14 +47,21 @@ namespace WpfMap
             string name = countryName.Text?.Trim();
             if (string.IsNullOrEmpty(name))
             {
-                _selection = CountryRepository.GetInstance().Countries;
+                _selection = ModelRepository.GetInstance().Countries;
             }
             else
             {
-                _selection = CountryRepository.GetInstance().Countries.Where(c => c.Name.Contains(name)).ToList();
+                _selection = ModelRepository.GetInstance().Countries.Where(c => c.Name.Contains(name)).ToList();
             }
             _selection.Sort((c1, c2) => c1.Name.CompareTo(c2.Name));
             countries.ItemsSource = _selection;
+        }
+
+        public void OpenLoginPage_Click(object sender, EventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
         }
     }
 }

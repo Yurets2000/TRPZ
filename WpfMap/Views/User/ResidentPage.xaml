@@ -18,6 +18,7 @@
                 <Label Content="Resident Info" Style="{StaticResource InfoHeaderStyle}"/>
                 <ListView Background="White" Height="170">
                     <Label Name="residentName" Content="{Binding Path=Name}" ContentStringFormat="Name: {0}" Style="{StaticResource InfoElementStyle}"/>
+                    <Label Name="residentUID" Content="{Binding Path=UID}" ContentStringFormat="UID: {0}" Style="{StaticResource InfoElementStyle}"/>
                     <Label Name="residentAge" Content="{Binding Path=Age}" ContentStringFormat="Age: {0}" Style="{StaticResource InfoElementStyle}"/>
                     <Label Name="residentGender" Content="{Binding Path=Gender}" ContentStringFormat="Gender: {0}" Style="{StaticResource InfoElementStyle}"/>
                     <Label Name="residentPhone" Content="{Binding Path=Phone}" ContentStringFormat="Phone: {0}" Style="{StaticResource InfoElementStyle}"/>

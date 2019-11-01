@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfMap.Helpers.Utils;
 
 namespace WpfMap.Model.DTO
 {
@@ -10,6 +11,7 @@ namespace WpfMap.Model.DTO
     {
         private static int _idGenerator = 0;
         public int Id { get; private set; }
+        public string UID { get; private set; }
         public enum Sex { MALE, FEMALE }
         public string Name { get; set; }
         public int Age { get; set; }
@@ -20,6 +22,7 @@ namespace WpfMap.Model.DTO
         public Resident()
         {
             Id = _idGenerator++;
+            UID = Generator.RandomString(7);
         }
 
         public override bool Equals(object obj)

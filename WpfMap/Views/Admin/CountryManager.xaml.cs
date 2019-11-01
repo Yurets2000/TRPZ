@@ -21,7 +21,7 @@ namespace WpfMap
 {
     public partial class CountryManager : Window
     {
-        private CountryRepository _repository = CountryRepository.GetInstance();
+        private ModelRepository _repository = ModelRepository.GetInstance();
         private CountryManagerValidator _validator = new CountryManagerValidator();
 
         public CountryManager()

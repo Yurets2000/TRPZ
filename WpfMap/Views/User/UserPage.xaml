@@ -24,7 +24,8 @@
                 <Label Content="Select Country" Grid.Row="1" Grid.Column="0" Margin="10, 5" Style="{StaticResource BoldLabelStyle}"/>
                 <TextBox Name="countryName" Text="Write Country Name" Grid.Row="2" Grid.Column="0" Margin="10, 5" Template="{StaticResource RoundedTextBoxTemplate}" Style="{StaticResource DefaultTextBoxStyle}"/>
                 <Button Click="SearchByName_Click" Content="Search" Grid.Row="3" Grid.Column="0" Margin="10, 5" Template="{StaticResource RoundedButtonTemplate}" Style="{StaticResource DefaultButtonStyle}"/>
-                <Image Source="D:/profiles/map.png" Grid.Row="4" Grid.Column="0" Height="200" Margin="15,50"/>
+                <Button Click="OpenLoginPage_Click" Content="Open Login Page" Grid.Row="4" Grid.Column="0" Margin="10, 5" Template="{StaticResource RoundedButtonTemplate}" Style="{StaticResource DefaultButtonStyle}"/>
+                <Image Source="D:/profiles/map.png" Grid.Row="5" Grid.Column="0" Height="150" Margin="15,50"/>
             </Grid>
             <StackPanel>
                 <ListView x:Name="countries" Width="390" VerticalAlignment="Top" DockPanel.Dock="Right" Height="350">

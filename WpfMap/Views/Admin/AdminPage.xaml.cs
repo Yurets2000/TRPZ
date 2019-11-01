@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfMap.Views.Admin;
 
 namespace WpfMap
 {
@@ -21,10 +22,24 @@ namespace WpfMap
             this.InitializeComponent();
         }
 
-        public void OpenCountryManager_Click(object sender, EventArgs e)
+        public void SelectManager_Click(object sender, EventArgs e)
         {
-            CountryManager countryManager = new CountryManager();
-            countryManager.ShowDialog();
+            string manager = ((TextBlock)managerSelector.SelectedValue).Text;
+            switch (manager)
+            {
+                case "Country Manager":
+                    CountryManager countryManager = new CountryManager();
+                    countryManager.ShowDialog();
+                    break;
+                case "Room-Resident Manager":
+                    RoomResidentManager roomManager = new RoomResidentManager();
+                    roomManager.ShowDialog();
+                    break;
+                case "Resident Manager":
+                    ResidentManager residentManager = new ResidentManager();
+                    residentManager.ShowDialog();
+                    break;
+            }
         }
 
         public void OpenUserPage_Click(object sender, EventArgs e)

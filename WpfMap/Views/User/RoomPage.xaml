@@ -25,6 +25,7 @@
                 <Label Content="Room Info" Style="{StaticResource InfoHeaderStyle}"/>
                 <ListView Background="White" Height="90">
                     <Label Name="roomNumber" Content="{Binding Path=No}" ContentStringFormat="No: {0}" Style="{StaticResource InfoElementStyle}"/>
+                    <Label Name="roomUID" Content="{Binding Path=UID}" ContentStringFormat="UID: {0}" Style="{StaticResource InfoElementStyle}"/>
                     <Label Name="roomArea" Content="{Binding Path=Area}" ContentStringFormat="Area: {0}" Style="{StaticResource InfoElementStyle}"/>
                     <Label Name="residentsCount" Content="{Binding Path=Residents.Count}" ContentStringFormat="Residents count: {0}" Style="{StaticResource InfoElementStyle}"/>
                 </ListView>

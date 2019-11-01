@@ -17,7 +17,6 @@ namespace WpfMap
 {
     public partial class ResidentPage : Window
     {
-
         private Resident _resident;
 
         public ResidentPage(Resident resident)

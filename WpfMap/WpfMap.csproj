@@ -70,6 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\Utils\Generator.cs" />
     <Compile Include="Helpers\Validators\CityManagerValidator.cs" />
     <Compile Include="Helpers\Validators\CountryManagerValidator.cs" />
     <Compile Include="Helpers\Validators\HouseManagerValidator.cs" />
@@ -84,13 +85,18 @@
     <Compile Include="Model\DTO\House.cs" />
     <Compile Include="Model\DTO\Resident.cs" />
     <Compile Include="Model\DTO\Room.cs" />
+    <Compile Include="Model\DTO\RoomResident.cs" />
     <Compile Include="Model\DTO\Street.cs" />
     <Compile Include="Model\DTO\User.cs" />
-    <Compile Include="Model\Repositories\CountryRepository.cs" />
+    <Compile Include="Model\Repositories\ModelRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
-    <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Helpers\Utils\FormUtils.cs" />
+    <Compile Include="ViewModels\User\UserViewModel.cs" />
     <Compile Include="Views\Admin\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\RoomResidentManager.xaml.cs">
+      <DependentUpon>RoomResidentManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Common\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
@@ -143,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Admin\AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\RoomResidentManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,5 +264,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

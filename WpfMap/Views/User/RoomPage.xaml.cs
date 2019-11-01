@@ -18,13 +18,15 @@ namespace WpfMap
     public partial class RoomPage : Window
     {
         private Room _room;
+        private List<Resident> _residents;
         private List<Resident> _selection;
 
         public RoomPage(Room room)
         {
             this.InitializeComponent();
             this.DataContext = _room = room;
-            _selection = _room.Residents;
+            _residents = _room.RoomResidents.Select(r => r.Resident).ToList();
+            _selection = _residents;
             _selection.Sort((r1, r2) => r1.Name.CompareTo(r2.Name));
             residents.ItemsSource = _selection;
         }
@@ -48,11 +50,11 @@ namespace WpfMap
             string name = residentName.Text?.Trim();
             if (string.IsNullOrEmpty(name))
             {
-                _selection = _room.Residents;
+                _selection = _residents;
             }
             else
             {
-                _selection = _room.Residents.Where(r => r.Name.Contains(name)).ToList();
+                _selection = _residents.Where(r => r.Name.Contains(name)).ToList();
             }
             _selection.Sort((r1, r2) => r1.Name.CompareTo(r2.Name));
             residents.ItemsSource = _selection;

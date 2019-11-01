@@ -37,7 +37,7 @@ namespace WpfMap
                 {
                     No = int.Parse(addRoomNo.Text),
                     Area = int.Parse(addRoomArea.Text),
-                    Residents = new List<Resident>()
+                    RoomResidents = new List<RoomResident>()
                 };
                 _house.Rooms.Add(room);
                 Utils.RefreshComboBox(roomSelector);
@@ -84,6 +84,7 @@ namespace WpfMap
             }
         }
 
+        /*
         public void OpenResidentManager_Click(object sender, EventArgs e)
         {
             Room room = (Room)roomSelector.SelectedItem;
@@ -97,6 +98,7 @@ namespace WpfMap
                 MessageBox.Show("Room is not selected");
             }
         }
+        */
 
         public void RoomSelector_SelectionChanged(object sender, EventArgs e)
         {
