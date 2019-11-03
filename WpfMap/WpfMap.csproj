@@ -50,8 +50,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -71,26 +78,37 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\Utils\Generator.cs" />
-    <Compile Include="Helpers\Validators\CityManagerValidator.cs" />
-    <Compile Include="Helpers\Validators\CountryManagerValidator.cs" />
-    <Compile Include="Helpers\Validators\HouseManagerValidator.cs" />
-    <Compile Include="Helpers\Validators\IManagerValidator.cs" />
-    <Compile Include="Helpers\Validators\BasicValidator.cs" />
-    <Compile Include="Helpers\Validators\ResidentManagerValidator.cs" />
-    <Compile Include="Helpers\Validators\RoomManagerValidator.cs" />
-    <Compile Include="Helpers\Validators\StreetManagerValidator.cs" />
+    <Compile Include="Helpers\Validators\CustomValidator.cs" />
     <Compile Include="Model\ApplicationContext.cs" />
-    <Compile Include="Model\DTO\City.cs" />
-    <Compile Include="Model\DTO\Country.cs" />
-    <Compile Include="Model\DTO\House.cs" />
-    <Compile Include="Model\DTO\Resident.cs" />
-    <Compile Include="Model\DTO\Room.cs" />
-    <Compile Include="Model\DTO\RoomResident.cs" />
-    <Compile Include="Model\DTO\Street.cs" />
-    <Compile Include="Model\DTO\User.cs" />
+    <Compile Include="Model\Entities\City.cs" />
+    <Compile Include="Model\Entities\Country.cs" />
+    <Compile Include="Model\Entities\EntityBase.cs" />
+    <Compile Include="Model\Entities\House.cs" />
+    <Compile Include="Model\Entities\Resident.cs" />
+    <Compile Include="Model\Entities\Room.cs" />
+    <Compile Include="Model\Entities\RoomResident.cs" />
+    <Compile Include="Model\Entities\Street.cs" />
+    <Compile Include="Model\Entities\User.cs" />
+    <Compile Include="Model\Repositories\IRepository.cs" />
     <Compile Include="Model\Repositories\ModelRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
-    <Compile Include="Helpers\Utils\FormUtils.cs" />
+    <Compile Include="ViewModels\Admin\AdminViewModel.cs" />
+    <Compile Include="ViewModels\Admin\CityManagerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\CountryManagerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\HouseManagerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\ResidentManagerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\RoomManagerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\RoomResidentManagerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\StreetManagerViewModel.cs" />
+    <Compile Include="ViewModels\Common\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Common\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\User\CityViewModel.cs" />
+    <Compile Include="ViewModels\User\CountryViewModel.cs" />
+    <Compile Include="ViewModels\User\HouseViewModel.cs" />
+    <Compile Include="ViewModels\User\ResidentViewModel.cs" />
+    <Compile Include="ViewModels\User\RoomViewModel.cs" />
+    <Compile Include="ViewModels\User\StreetViewModel.cs" />
     <Compile Include="ViewModels\User\UserViewModel.cs" />
     <Compile Include="Views\Admin\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
@@ -184,7 +202,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Common\MainWindow.xaml">
+    <Page Include="Views\Common\Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -192,8 +210,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Common\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Views\Common\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\User\ResidentPage.xaml">
@@ -244,6 +262,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

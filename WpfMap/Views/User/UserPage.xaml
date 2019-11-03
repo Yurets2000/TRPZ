@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:WpfMap"
         mc:Ignorable="d"
         Title="UserPage" Height="480" Width="640">
@@ -15,27 +16,31 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="250" />
                 </Grid.ColumnDefinitions>
                 <Label Content="Travel Maps" Grid.Row="0" Grid.Column="0" Margin="10, 5" FontWeight="Bold" FontSize="32" FontFamily="Rockwell" HorizontalAlignment="Center" Foreground="Green"/>
                 <Label Content="Select Country" Grid.Row="1" Grid.Column="0" Margin="10, 5" Style="{StaticResource BoldLabelStyle}"/>
-                <TextBox Name="countryName" Text="Write Country Name" Grid.Row="2" Grid.Column="0" Margin="10, 5" Template="{StaticResource RoundedTextBoxTemplate}" Style="{StaticResource DefaultTextBoxStyle}"/>
-                <Button Click="SearchByName_Click" Content="Search" Grid.Row="3" Grid.Column="0" Margin="10, 5" Template="{StaticResource RoundedButtonTemplate}" Style="{StaticResource DefaultButtonStyle}"/>
-                <Button Click="OpenLoginPage_Click" Content="Open Login Page" Grid.Row="4" Grid.Column="0" Margin="10, 5" Template="{StaticResource RoundedButtonTemplate}" Style="{StaticResource DefaultButtonStyle}"/>
-                <Image Source="D:/profiles/map.png" Grid.Row="5" Grid.Column="0" Height="150" Margin="15,50"/>
+                <TextBox Name="countryName" Text="{Binding CountryName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="0" Margin="10, 5" Template="{StaticResource RoundedTextBoxTemplate}" Style="{StaticResource DefaultTextBoxStyle}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding SearchByNameCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <Button Content="Open Login Page" Command="{Binding OpenLoginPageCommand}" Grid.Row="3" Grid.Column="0" Margin="10, 5" Template="{StaticResource RoundedButtonTemplate}" Style="{StaticResource DefaultButtonStyle}"/>
+                <Image Source="D:/profiles/map.png" Grid.Row="4" Grid.Column="0" Height="150" Margin="15,50"/>
             </Grid>
             <StackPanel>
-                <ListView x:Name="countries" Width="390" VerticalAlignment="Top" DockPanel.Dock="Right" Height="350">
+                <ListView x:Name="countries" ItemsSource="{Binding Selection}" SelectedItem="{Binding SelectedCountry}" Width="390" VerticalAlignment="Top" DockPanel.Dock="Right" Height="350">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Country" Width="390" DisplayMemberBinding="{Binding Path=Name}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button Click="FindCountry_Click" Content="Select" Grid.Row="3" Grid.Column="0" Margin="20" Template="{StaticResource RoundedButtonTemplate}" Style="{StaticResource DefaultButtonStyle}"/>
+                <Button Content="Select" Command="{Binding FindCountryCommand}" Grid.Row="3" Grid.Column="0" Margin="20" Template="{StaticResource RoundedButtonTemplate}" Style="{StaticResource DefaultButtonStyle}"/>
             </StackPanel>
         </DockPanel>
     </Grid>

@@ -5,29 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMap"
         mc:Ignorable="d"
-        Title="AdminPage" Height="360" Width="360">
+        Title="AdminPage" Height="360" Width="380">
     <Grid x:Name="LayoutRoot" Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="140" />
             <ColumnDefinition Width="120" />
             <ColumnDefinition Width="120" />
         </Grid.ColumnDefinitions>
         <Label Content="Travel Maps" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontWeight="Bold" FontSize="32" FontFamily="Rockwell" HorizontalAlignment="Center" Foreground="Green"/>
         <Label Content="Admin's Page" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" FontWeight="Bold" FontSize="18" FontFamily="Rockwell" HorizontalAlignment="Center" Foreground="Black"/>
         <Label Grid.Row="2" Grid.Column="0" Content="Select Manager:" HorizontalContentAlignment="Center" FontWeight="Bold" Margin="0,10"/>
-        <ComboBox x:Name="managerSelector" Grid.Row="2" Grid.Column="1" SelectedIndex="0" Margin="0,10">
-            <TextBlock>Country Manager</TextBlock>
-            <TextBlock>Room-Resident Manager</TextBlock>
-            <TextBlock>Resident Manager</TextBlock>
+        <ComboBox x:Name="managerSelector" SelectedValuePath="content" Text="{Binding Manager, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" SelectedIndex="0" Margin="0,10">
+            <ComboBoxItem>Country Manager</ComboBoxItem>
+            <ComboBoxItem>Room-Resident Manager</ComboBoxItem>
+            <ComboBoxItem>Resident Manager</ComboBoxItem>
         </ComboBox>
-        <Button Click="SelectManager_Click" Content="Select" Grid.Row="2" Grid.Column="3" Margin="20,10"/>
-        <Label Grid.Row="5" Grid.Column="0" Content="Go To User Page:" HorizontalContentAlignment="Center" FontWeight="Bold" Margin="10,10"/>
-        <Button Click="OpenUserPage_Click" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Content="Open User Page" Margin="0,10,20,10"/>
+        <Button Command="{Binding SelectManagerCommand}" Content="Select" Grid.Row="2" Grid.Column="3" Margin="20,10"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Go To User Page:" HorizontalContentAlignment="Center" FontWeight="Bold" Margin="10,10"/>
+        <Button Command="{Binding OpenUserPageCommand}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Content="Open User Page" Margin="0,10,20,10"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Go To Login Page:" HorizontalContentAlignment="Center" FontWeight="Bold" Margin="10,10"/>
+        <Button Command="{Binding OpenLoginPageCommand}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Content="Open Login Page" Margin="0,10,20,10"/>
     </Grid>
 </Window>

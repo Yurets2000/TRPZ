@@ -11,10 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfMap.Model.DTO;
+using WpfMap.Model.Entities;
 using WpfMap.Model.Repositories;
 
-namespace WpfMap.Views.Admin
+namespace WpfMap
 {
     public partial class RoomResidentManager : Window
     {

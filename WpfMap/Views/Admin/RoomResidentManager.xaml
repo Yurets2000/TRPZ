@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfMap.Views.Admin.RoomResidentManager"
+﻿<Window x:Class="WpfMap.RoomResidentManager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -29,10 +29,10 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Add Resident To Room" Style="{StaticResource BoldLabelStyle}" Margin="0,10"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Select Room: " FontWeight="Medium" Margin="20,0,0,0"/>
-            <TextBox Name="addRoomUID" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"/>
+            <TextBox Name="addRoomUID" Text="{Binding AddRoomUID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Select Resident: " FontWeight="Medium" Margin="20,0,0,0"/>
-            <TextBox Name="addResidentUID" Grid.Row="3" Grid.Column="1" Margin="0,0,20,0"/>
-            <Button Click="AddResident_Click" Grid.Row="5" Grid.Column="1" Content="Add" Margin="0,0,20,0"/>
+            <TextBox Name="addResidentUID" Text="{Binding AddResidentUID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,20,0"/>
+            <Button Command="{Binding AddResidentCommand}" Grid.Row="5" Grid.Column="1" Content="Add" Margin="0,0,20,0"/>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -49,10 +49,10 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Delete Resident From Room" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,10"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Select Room: " FontWeight="Medium" Margin="20,0,0,0"/>
-            <TextBox Name="deleteRoomUID" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"/>
+            <TextBox Name="deleteRoomUID" Text="{Binding DeleteRoomUID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Select Resident: " FontWeight="Medium" Margin="20,0,0,0"/>
-            <TextBox Name="deleteResidentUID" Grid.Row="3" Grid.Column="1" Margin="0,0,20,0"/>
-            <Button Click="DeleteResident_Click" Grid.Row="5" Grid.Column="1" Content="Delete" Margin="0,0,20,0"/>
+            <TextBox Name="deleteResidentUID" Text="{Binding DeleteResidentUID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,20,0"/>
+            <Button Command="{Binding }" Grid.Row="5" Grid.Column="1" Content="Delete" Margin="0,0,20,0"/>
         </Grid>
     </Grid>
 </Window>

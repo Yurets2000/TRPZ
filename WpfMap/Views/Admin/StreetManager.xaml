@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMap"
         mc:Ignorable="d"
@@ -27,8 +28,8 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Add Street" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,10"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Name: " FontWeight="Medium" Margin="20,0,0,0"/>
-            <TextBox Name="addStreetName" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"/>
-            <Button Click="AddStreet_Click" Grid.Row="3" Grid.Column="1" Content="Add" Margin="0,0,20,0"/>
+            <TextBox Name="addStreetName" Text="{Binding AddStreetName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"/>
+            <Button Command="{Binding AddStreetCommand}" Grid.Row="3" Grid.Column="1" Content="Add" Margin="0,0,20,0"/>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -49,12 +50,18 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Edit/Delete Street" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,10"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Select Street: " FontWeight="Medium" Margin="20,0,0,0"/>
-            <ComboBox Name="streetSelector" ItemsSource="{Binding Streets}" DisplayMemberPath="Name" SelectionChanged="StreetSelector_SelectionChanged" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"/>
+            <ComboBox Name="streetSelector" ItemsSource="{Binding Streets, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedStreet, UpdateSourceTrigger=PropertyChanged}" IsSynchronizedWithCurrentItem="True" DisplayMemberPath="Name" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectStreetCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
             <Label Grid.Row="3" Grid.Column="0" Content="Name: " FontWeight="Medium" Margin="20,0,0,0"/>
-            <TextBox Name="editStreetName" Grid.Row="3" Grid.Column="1" Margin="0,0,20,0"/>
-            <Button Click="EditStreet_Click" Grid.Row="5" Grid.Column="1" Content="Edit" Margin="0,0,20,0"/>
-            <Button Click="DeleteStreet_Click" Grid.Row="7" Grid.Column="1" Content="Delete" Margin="0,0,20,0"/>
-            <Button Click="OpenHouseManager_Click" Grid.Row="9" Grid.Column="1" Content="Open House Manager" Margin="0,0,20,0"/>
+            <TextBox Name="editStreetName" Text="{Binding EditStreetName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,20,0"/>
+            <Button Command="{Binding EditStreetCommand}" Grid.Row="5" Grid.Column="1" Content="Edit" Margin="0,0,20,0"/>
+            <Button Command="{Binding DeleteStreetCommand}" Grid.Row="7" Grid.Column="1" Content="Delete" Margin="0,0,20,0"/>
+            <Button Command="{Binding OpenHouseManagerCommand}" Grid.Row="9" Grid.Column="1" Content="Open House Manager" Margin="0,0,20,0"/>
         </Grid>
     </Grid>
 </Window>

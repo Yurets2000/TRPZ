@@ -2,19 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMap"
         mc:Ignorable="d"
         Title="Registration" Height="320" Width="480">
-    <Window.Resources>
-        <Style x:Key="ButtonWithAgreement" TargetType="Button">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=Agreement, Path=IsChecked}" Value="False">
-                    <Setter Property="IsEnabled" Value="False"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
     <Grid x:Name="LayoutRoot">
         <Grid.Background>
             <ImageBrush ImageSource="D:/profiles/mountains-3.jpg" Stretch="UniformToFill"/>
@@ -36,12 +28,34 @@
                 <SolidColorBrush Color="Black" Opacity="0.6"/>
             </StackPanel.Background>
             <Label Content="Registration" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="24" FontFamily="Rockwell" HorizontalAlignment="Center" Foreground="White"/>
-            <TextBox Name="login" Width="150" Text="Your Login" HorizontalContentAlignment="Center" Margin="0,20,0,0"/>
-            <PasswordBox Name="password" Width="150" HorizontalContentAlignment="Center" Margin="0,20,0,0"/>
+            <TextBox Name="login" Width="150" Text="{Binding Username, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" HorizontalContentAlignment="Center" Margin="0,20,0,0"/>
+            <PasswordBox Name="password" Width="150" HorizontalContentAlignment="Center" Margin="0,20,0,0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}"
+                                               CommandParameter="{Binding ElementName=password, Mode=OneWay}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
             <CheckBox Name="Agreement" FlowDirection="RightToLeft" HorizontalAlignment="Center" Margin="0,20,0,0">
                 <TextBlock FlowDirection="LeftToRight" Foreground="White" FontWeight="Bold" FontSize="10" Text="I agree with terms of usage "/>
             </CheckBox>
-            <Button Click="Register_Click" Content="Register" Width="150" HorizontalContentAlignment="Center" Margin="0,20,0,0" Style="{StaticResource ButtonWithAgreement}"/>
+            <Button Command="{Binding RegisterCommand}" Content="Register" Width="150" HorizontalContentAlignment="Center" Margin="0,20,0,0">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="IsEnabled" Value="false" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=Agreement, Path=IsChecked}" Value="true"/>
+                                    <Condition Binding="{Binding ElementName=login, Path=(Validation.HasError)}" Value="false" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="true" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

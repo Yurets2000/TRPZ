@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfMap.Helpers.Utils;
 
-namespace WpfMap.Model.DTO
+namespace WpfMap.Model.Entities
 {
     public class Resident
     {
@@ -15,7 +15,7 @@ namespace WpfMap.Model.DTO
         public enum Sex { MALE, FEMALE }
         public string Name { get; set; }
         public int Age { get; set; }
-        public Sex Gender { get; set; }
+        public Sex? Gender { get; set; }
         public string Phone { get; set; }
         public int ResidenceTime { get; set; }
 

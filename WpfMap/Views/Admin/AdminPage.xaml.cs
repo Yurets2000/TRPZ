@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfMap.Views.Admin;
+using WpfMap.ViewModels.Admin;
 
 namespace WpfMap
 {
@@ -19,33 +19,10 @@ namespace WpfMap
     {
         public AdminPage()
         {
-            this.InitializeComponent();
-        }
-
-        public void SelectManager_Click(object sender, EventArgs e)
-        {
-            string manager = ((TextBlock)managerSelector.SelectedValue).Text;
-            switch (manager)
-            {
-                case "Country Manager":
-                    CountryManager countryManager = new CountryManager();
-                    countryManager.ShowDialog();
-                    break;
-                case "Room-Resident Manager":
-                    RoomResidentManager roomManager = new RoomResidentManager();
-                    roomManager.ShowDialog();
-                    break;
-                case "Resident Manager":
-                    ResidentManager residentManager = new ResidentManager();
-                    residentManager.ShowDialog();
-                    break;
-            }
-        }
-
-        public void OpenUserPage_Click(object sender, EventArgs e)
-        {
-            UserPage userPage = new UserPage();
-            userPage.ShowDialog();
+            InitializeComponent();
+            AdminViewModel viewModel = new AdminViewModel();
+            DataContext = viewModel;
+            viewModel.ClosingRequest += (sender, e) => Close();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfMap.Model.DTO
+namespace WpfMap.Model.Entities
 {
     public class City
     {

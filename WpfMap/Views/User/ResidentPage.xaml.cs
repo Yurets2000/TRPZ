@@ -11,18 +11,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfMap.Model.DTO;
+using WpfMap.Model.Entities;
+using WpfMap.ViewModels.User;
 
 namespace WpfMap
 {
     public partial class ResidentPage : Window
     {
-        private Resident _resident;
-
         public ResidentPage(Resident resident)
         {
-            this.InitializeComponent();
-            DataContext = _resident = resident;
+            InitializeComponent();
+            ResidentViewModel viewModel = new ResidentViewModel(resident);
+            DataContext = viewModel;
         }
     }
 }

@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfMap.Helpers.Utils;
 
-namespace WpfMap.Model.DTO
+namespace WpfMap.Model.Entities
 {
-    public class House
+    public class Room
     {
         private static int _idGenerator = 0;
         public int Id { get; private set; }
-        public string Address { get; set; }
-        public int Habitants
-        {
-            get { return Rooms.Sum(room => room.RoomResidents.Count); }
-        }
-        public List<Room> Rooms { get; set; }
+        public string UID { get; private set; }
+        public int Area { get; set; }
+        public int No { get; set; }
+        public List<RoomResident> RoomResidents { get; set; }
 
-        public House()
+        public Room()
         {
             Id = _idGenerator++;
+            UID = Generator.RandomString(7);
         }
 
         public override bool Equals(object obj)
         {
-            var house = obj as House;
-            return house != null &&
-                   Id == house.Id;
+            var room = obj as Room;
+            return room != null &&
+                   Id == room.Id;
         }
 
         public override int GetHashCode()
