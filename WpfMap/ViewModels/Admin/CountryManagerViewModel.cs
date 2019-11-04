@@ -5,10 +5,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using WpfMap.Model.Entities;
+using WpfMap.Models.Entities;
 using System.ComponentModel.DataAnnotations;
-using WpfMap.Model.Repositories;
+using WpfMap.Models.Repositories;
 using System.Collections.ObjectModel;
+using WpfMap.Models.Contexts;
 
 namespace WpfMap.ViewModels.Admin
 {
@@ -19,7 +20,6 @@ namespace WpfMap.ViewModels.Admin
         private Country _selectedCountry;
         private ObservableCollection<Country> _countries;
         private string _editCountryName;
-        private City _editCountryCapital;
 
         private RelayCommand _selectCountryCommand;
         private RelayCommand _addCountryCommand;
@@ -27,7 +27,6 @@ namespace WpfMap.ViewModels.Admin
         private RelayCommand _deleteCountryCommand;
         private RelayCommand _openCityManagerCommand;
 
-        private ModelRepository _repository = ModelRepository.GetInstance();
         public ObservableCollection<Country> Countries
         {
             get { return _countries; }
@@ -62,17 +61,6 @@ namespace WpfMap.ViewModels.Admin
             }
         }
         [Required(ErrorMessage = "should be selected")]
-        public City EditCountryCapital
-        {
-            get { return _editCountryCapital; }
-            set
-            {
-                ValidateProperty(value, "EditCountryCapital");
-                _editCountryCapital = value;
-                OnPropertyChanged("EditCountryCapital");
-            }
-        }
-        [Required(ErrorMessage = "should be selected")]
         public Country SelectedCountry
         {
             get { return _selectedCountry; }
@@ -91,13 +79,18 @@ namespace WpfMap.ViewModels.Admin
                 return _addCountryCommand ??
                     (_addCountryCommand = new RelayCommand(obj =>
                     {
-                        Country country = new Country
+                        using (MainContext context = new MainContext())
                         {
-                            Name = AddCountryName,
-                            Cities = new List<City>()
-                        };
-                        _repository.Countries.Add(country);
-                        Countries = new ObservableCollection<Country>(_repository.Countries);
+                            var countryRep = new CountryRepository(context);
+                            Country country = new Country
+                            {
+                                Name = AddCountryName,
+                                Cities = new List<City>()
+                            };
+                            countryRep.Add(country);
+                            context.SaveChanges();
+                            Countries = new ObservableCollection<Country>(countryRep.List());
+                        }
                     }));
             }
         }
@@ -108,8 +101,7 @@ namespace WpfMap.ViewModels.Admin
                 return _selectCountryCommand ??
                     (_selectCountryCommand = new RelayCommand(obj =>
                     {
-                        EditCountryName = SelectedCountry?.Name;
-                        EditCountryCapital = SelectedCountry?.Capital;      
+                        EditCountryName = SelectedCountry?.Name;     
                     }));
             }
         }
@@ -120,10 +112,15 @@ namespace WpfMap.ViewModels.Admin
                 return _editCountryCommand ??
                     (_editCountryCommand = new RelayCommand(obj =>
                     {
-                        SelectedCountry.Name = EditCountryName;
-                        SelectedCountry.Capital = EditCountryCapital;
-                        Countries = new ObservableCollection<Country>(_repository.Countries);
-                        SelectedCountry = SelectedCountry;
+                        using (MainContext context = new MainContext())
+                        {
+                            var countryRep = new CountryRepository(context);
+                            SelectedCountry.Name = EditCountryName;
+                            countryRep.Edit(SelectedCountry);
+                            context.SaveChanges();
+                            Countries = new ObservableCollection<Country>(countryRep.List());
+                            SelectedCountry = SelectedCountry;
+                        }
                     }));
             }
         }
@@ -134,8 +131,13 @@ namespace WpfMap.ViewModels.Admin
                 return _deleteCountryCommand ??
                     (_deleteCountryCommand = new RelayCommand(obj =>
                     {
-                        _repository.Countries.Remove(SelectedCountry);
-                        Countries = new ObservableCollection<Country>(_repository.Countries);
+                        using (MainContext context = new MainContext())
+                        {
+                            var countryRep = new CountryRepository(context);
+                            countryRep.Delete(SelectedCountry);
+                            context.SaveChanges();
+                            Countries = new ObservableCollection<Country>(countryRep.List());
+                        }
                     }));
             }
         }
@@ -154,7 +156,11 @@ namespace WpfMap.ViewModels.Admin
 
         public CountryManagerViewModel()
         {
-            Countries = new ObservableCollection<Country>(_repository.Countries);
+            using (MainContext context = new MainContext())
+            {
+                var countryRep = new CountryRepository(context);
+                Countries = new ObservableCollection<Country>(countryRep.List());
+            }
         }
 
         private void ValidateProperty<T>(T value, string name)

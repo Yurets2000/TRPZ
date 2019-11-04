@@ -6,8 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfMap.Model.Entities;
-using WpfMap.Model.Repositories;
+using WpfMap.Models.Contexts;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 
 namespace WpfMap.ViewModels.User
 {
@@ -91,9 +92,12 @@ namespace WpfMap.ViewModels.User
 
         public CountryViewModel(Country country)
         {
-            Country = country;
-            Selection = Country.Cities;
-            Selection.Sort((c1, c2) => c1.Name.CompareTo(c2.Name));
+            using (MainContext context = new MainContext())
+            {
+                Country = country;
+                Selection = Country.Cities;
+                Selection.Sort((c1, c2) => c1.Name.CompareTo(c2.Name));
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

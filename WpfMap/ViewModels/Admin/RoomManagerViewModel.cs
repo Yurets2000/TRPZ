@@ -7,7 +7,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using WpfMap.Model.Entities;
+using WpfMap.Helpers.Utils;
+using WpfMap.Models.Contexts;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 
 namespace WpfMap.ViewModels.Admin
 {
@@ -103,13 +106,23 @@ namespace WpfMap.ViewModels.Admin
                 return _addRoomCommand ??
                     (_addRoomCommand = new RelayCommand(obj =>
                     {
-                        Room room = new Room
+                        using (MainContext context = new MainContext())
                         {
-                            No = int.Parse(AddRoomNo),
-                            Area = int.Parse(AddRoomArea)
-                        };
-                        House.Rooms.Add(room);
-                        Rooms = new ObservableCollection<Room>(House.Rooms);
+                            var roomRep = new RoomRepository(context);
+                            var houseRep = new HouseRepository(context);
+                            context.Houses.Attach(House);
+                            Room room = new Room
+                            {
+                                UID = Generator.RandomString(7),
+                                No = int.Parse(AddRoomNo),
+                                Area = int.Parse(AddRoomArea),
+                                House = House
+                            };
+                            roomRep.Add(room);
+                            houseRep.Edit(House);
+                            context.SaveChanges();
+                            Rooms = new ObservableCollection<Room>(House.Rooms);
+                        }
                     }));
             }
         }
@@ -132,10 +145,16 @@ namespace WpfMap.ViewModels.Admin
                 return _editRoomCommand ??
                     (_editRoomCommand = new RelayCommand(obj =>
                     {
-                        SelectedRoom.No = int.Parse(EditRoomNo);
-                        SelectedRoom.Area = int.Parse(EditRoomArea);
-                        Rooms = new ObservableCollection<Room>(House.Rooms);
-                        SelectedRoom = SelectedRoom;
+                        using (MainContext context = new MainContext())
+                        {
+                            var roomRep = new RoomRepository(context);
+                            SelectedRoom.No = int.Parse(EditRoomNo);
+                            SelectedRoom.Area = int.Parse(EditRoomArea);
+                            roomRep.Edit(SelectedRoom);
+                            context.SaveChanges();
+                            Rooms = new ObservableCollection<Room>(House.Rooms);
+                            SelectedRoom = SelectedRoom;
+                        }
                     }));
             }
         }
@@ -146,8 +165,16 @@ namespace WpfMap.ViewModels.Admin
                 return _deleteRoomCommand ??
                     (_deleteRoomCommand = new RelayCommand(obj =>
                     {
-                        House.Rooms.Remove(SelectedRoom);
-                        Rooms = new ObservableCollection<Room>(House.Rooms);
+                        using (MainContext context = new MainContext())
+                        {
+                            var roomRep = new RoomRepository(context);
+                            var houseRep = new HouseRepository(context);
+                            context.Houses.Attach(House);
+                            roomRep.Delete(SelectedRoom);
+                            houseRep.Edit(House);
+                            context.SaveChanges();
+                            Rooms = new ObservableCollection<Room>(House.Rooms);
+                        }
                     }));
             }
         }
@@ -164,8 +191,12 @@ namespace WpfMap.ViewModels.Admin
 
         public RoomManagerViewModel(House house)
         {
-            House = house;
-            Rooms = new ObservableCollection<Room>(House.Rooms);
+            using (MainContext context = new MainContext())
+            {
+                House = house;
+                context.Houses.Attach(House);
+                Rooms = new ObservableCollection<Room>(House.Rooms);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

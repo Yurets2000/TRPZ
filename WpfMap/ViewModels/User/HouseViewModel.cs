@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfMap.Model.Entities;
+using WpfMap.Models.Entities;
 
 namespace WpfMap.ViewModels.User
 {

@@ -7,8 +7,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using WpfMap.Model.Entities;
-using WpfMap.Model.Repositories;
+using WpfMap.Helpers.Utils;
+using WpfMap.Models.Contexts;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 
 namespace WpfMap.ViewModels.Admin
 {
@@ -34,7 +36,6 @@ namespace WpfMap.ViewModels.Admin
         private RelayCommand _editResidentCommand;
         private RelayCommand _deleteResidentCommand;
 
-        private ModelRepository _repository = ModelRepository.GetInstance();
         public IEnumerable<Resident.Sex> Genders
         {
             get
@@ -156,7 +157,6 @@ namespace WpfMap.ViewModels.Admin
             }
         }
         [Required(ErrorMessage = "should not be empty")]
-        [Phone(ErrorMessage = "should be phone number")]
         public string EditResidentPhone
         {
             get { return _editResidentPhone; }
@@ -179,7 +179,6 @@ namespace WpfMap.ViewModels.Admin
                 OnPropertyChanged("EditResidentResidenceTime");
             }
         }
-        [Required(ErrorMessage = "should be selected")]
         public Resident SelectedResident
         {
             get { return _selectedResident; }
@@ -198,16 +197,22 @@ namespace WpfMap.ViewModels.Admin
                 return _addResidentCommand ??
                     (_addResidentCommand = new RelayCommand(obj =>
                     {
-                        Resident resident = new Resident
+                        using (MainContext context = new MainContext())
                         {
-                            Name = AddResidentName,
-                            Age = int.Parse(AddResidentAge),
-                            Gender = AddResidentGender,
-                            Phone = AddResidentPhone,
-                            ResidenceTime = int.Parse(AddResidentResidenceTime)
-                        };
-                        _repository.Residents.Add(resident);
-                        Residents = new ObservableCollection<Resident>(_repository.Residents);
+                            var residentRep = new ResidentRepository(context);
+                            Resident resident = new Resident
+                            {
+                                UID = Generator.RandomString(7),
+                                Name = AddResidentName,
+                                Age = int.Parse(AddResidentAge),
+                                Gender = AddResidentGender,
+                                Phone = AddResidentPhone,
+                                ResidenceTime = int.Parse(AddResidentResidenceTime)
+                            };
+                            residentRep.List().Add(resident);
+                            context.SaveChanges();
+                            Residents = new ObservableCollection<Resident>(residentRep.List());
+                        }
                     }));
             }
         }
@@ -218,12 +223,19 @@ namespace WpfMap.ViewModels.Admin
                 return _selectResidentCommand ??
                     (_selectResidentCommand = new RelayCommand(obj =>
                     {
-                        SelectedResident = _repository.Residents.Find(r => r.UID == ResidentUID);                   
-                        EditResidentName = SelectedResident?.Name;
-                        EditResidentAge = SelectedResident?.Age.ToString();
-                        EditResidentGender = SelectedResident?.Gender;
-                        EditResidentPhone = SelectedResident?.Phone;
-                        EditResidentResidenceTime = SelectedResident?.ResidenceTime.ToString();
+                        using (MainContext context = new MainContext())
+                        {
+                            var residentRep = new ResidentRepository(context);
+                            SelectedResident = residentRep.List(r => r.UID == ResidentUID).FirstOrDefault();
+                            if (SelectedResident != null)
+                            {
+                                EditResidentName = SelectedResident.Name;
+                                EditResidentAge = SelectedResident.Age.ToString();
+                                EditResidentGender = SelectedResident.Gender;
+                                EditResidentPhone = SelectedResident.Phone;
+                                EditResidentResidenceTime = SelectedResident.ResidenceTime.ToString();
+                            }
+                        }
                     }));
             }
         }
@@ -234,13 +246,19 @@ namespace WpfMap.ViewModels.Admin
                 return _editResidentCommand ??
                     (_editResidentCommand = new RelayCommand(obj =>
                     {
-                        SelectedResident.Name = EditResidentName;
-                        SelectedResident.Age = int.Parse(EditResidentAge);
-                        SelectedResident.Gender = EditResidentGender;
-                        SelectedResident.Phone = EditResidentPhone;
-                        SelectedResident.ResidenceTime = int.Parse(EditResidentResidenceTime);
-                        Residents = new ObservableCollection<Resident>(_repository.Residents);
-                        SelectedResident = SelectedResident;
+                        using (MainContext context = new MainContext())
+                        {
+                            var residentRep = new ResidentRepository(context);
+                            SelectedResident.Name = EditResidentName;
+                            SelectedResident.Age = int.Parse(EditResidentAge);
+                            SelectedResident.Gender = EditResidentGender;
+                            SelectedResident.Phone = EditResidentPhone;
+                            SelectedResident.ResidenceTime = int.Parse(EditResidentResidenceTime);
+                            residentRep.Edit(SelectedResident);
+                            context.SaveChanges();
+                            Residents = new ObservableCollection<Resident>(residentRep.List());
+                            SelectedResident = SelectedResident;
+                        }
                     }));
             }
         }
@@ -251,8 +269,13 @@ namespace WpfMap.ViewModels.Admin
                 return _deleteResidentCommand ??
                     (_deleteResidentCommand = new RelayCommand(obj =>
                     {
-                        _repository.Residents.Remove(SelectedResident);
-                        Residents = new ObservableCollection<Resident>(_repository.Residents);
+                        using (MainContext context = new MainContext())
+                        {
+                            var residentRep = new ResidentRepository(context);
+                            residentRep.List().Remove(SelectedResident);
+                            context.SaveChanges();
+                            Residents = new ObservableCollection<Resident>(residentRep.List());
+                        }
                     }));
             }
         }
@@ -267,7 +290,11 @@ namespace WpfMap.ViewModels.Admin
 
         public ResidentManagerViewModel()
         {
-            Residents = new ObservableCollection<Resident>(_repository.Residents);
+            using (MainContext context = new MainContext())
+            {
+                var residentRep = new ResidentRepository(context);
+                Residents = new ObservableCollection<Resident>(residentRep.List());
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

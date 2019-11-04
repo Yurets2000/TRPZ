@@ -7,7 +7,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using WpfMap.Model.Entities;
+using WpfMap.Models.Contexts;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 
 namespace WpfMap.ViewModels.Admin
 {
@@ -77,12 +79,21 @@ namespace WpfMap.ViewModels.Admin
                 return _addStreetCommand ??
                     (_addStreetCommand = new RelayCommand(obj =>
                     {
-                        Street street = new Street
+                        using (MainContext context = new MainContext())
                         {
-                            Name = AddStreetName
-                        };
-                        City.Streets.Add(street);
-                        Streets = new ObservableCollection<Street>(City.Streets);
+                            var streetRep = new StreetRepository(context);
+                            var cityRep = new CityRepository(context);
+                            context.Cities.Attach(City);
+                            Street street = new Street
+                            {
+                                Name = AddStreetName,
+                                City = City
+                            };
+                            streetRep.Add(street);
+                            cityRep.Edit(City);
+                            context.SaveChanges();
+                            Streets = new ObservableCollection<Street>(City.Streets);
+                        }
                     }));
             }
         }
@@ -104,9 +115,15 @@ namespace WpfMap.ViewModels.Admin
                 return _editStreetCommand ??
                     (_editStreetCommand = new RelayCommand(obj =>
                     {
-                        SelectedStreet.Name = EditStreetName;
-                        Streets = new ObservableCollection<Street>(City.Streets);
-                        SelectedStreet = SelectedStreet;
+                        using (MainContext context = new MainContext())
+                        {
+                            var streetRep = new StreetRepository(context);
+                            SelectedStreet.Name = EditStreetName;
+                            streetRep.Edit(SelectedStreet);
+                            context.SaveChanges();
+                            Streets = new ObservableCollection<Street>(City.Streets);
+                            SelectedStreet = SelectedStreet;
+                        }
                     }));
             }
         }
@@ -117,8 +134,16 @@ namespace WpfMap.ViewModels.Admin
                 return _deleteStreetCommand ??
                     (_deleteStreetCommand = new RelayCommand(obj =>
                     {
-                        City.Streets.Remove(SelectedStreet);
-                        Streets = new ObservableCollection<Street>(City.Streets);
+                        using (MainContext context = new MainContext())
+                        {
+                            var streetRep = new StreetRepository(context);
+                            var cityRep = new CityRepository(context);
+                            context.Cities.Attach(City);
+                            streetRep.Delete(SelectedStreet);
+                            cityRep.Edit(City);
+                            context.SaveChanges();
+                            Streets = new ObservableCollection<Street>(City.Streets);
+                        }
                     }));
             }
         }
@@ -147,8 +172,12 @@ namespace WpfMap.ViewModels.Admin
 
         public StreetManagerViewModel(City city)
         {
-            City = city;
-            Streets = new ObservableCollection<Street>(City.Streets);
+            using (MainContext context = new MainContext())
+            {
+                City = city;
+                context.Cities.Attach(City);
+                Streets = new ObservableCollection<Street>(City.Streets);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

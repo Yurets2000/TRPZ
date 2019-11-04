@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfMap.Model;
-using WpfMap.Model.Entities;
-using WpfMap.Model.Repositories;
+using WpfMap.Models;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 using WpfMap.ViewModels.Common;
 using WpfMap.Views.Common;
 
@@ -22,8 +22,6 @@ namespace WpfMap
 {
     public partial class Login : Window
     {
-        private UserRepository _repository = UserRepository.GetInstance();
-
         public Login()
         {
             InitializeComponent();

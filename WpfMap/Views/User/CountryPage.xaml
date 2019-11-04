@@ -30,7 +30,6 @@
                 <Label Content="Country Info" Style="{StaticResource InfoHeaderStyle}"/>
                 <ListView Name="countryInfo" Background="White" Height="90">
                     <Label Name="countryName" Content="{Binding Path=Country.Name}" ContentStringFormat="Name: {0}" Style="{StaticResource InfoElementStyle}"/>
-                    <Label Name="countryCapital" Content="{Binding Path=Country.Capital.Name}" ContentStringFormat="Capital: {0}" Style="{StaticResource InfoElementStyle}"/>
                     <Label Name="countryPopulation" Content="{Binding Path=Country.Population}" ContentStringFormat="Population: {0}" Style="{StaticResource InfoElementStyle}"/>
                     <Label Name="countryArea" Content="{Binding Path=Country.Area}" ContentStringFormat="Area: {0} km^2" Style="{StaticResource InfoElementStyle}"/>
                     <Label Name="citiesCount" Content="{Binding Path=Country.Cities.Count}" ContentStringFormat="Cities count: {0}" Style="{StaticResource InfoElementStyle}"/>

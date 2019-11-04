@@ -7,8 +7,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfMap.Model.Entities;
-using WpfMap.Model.Repositories;
+using WpfMap.Models.Contexts;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 
 namespace WpfMap.ViewModels.Admin
 {
@@ -22,10 +23,8 @@ namespace WpfMap.ViewModels.Admin
         private RelayCommand _addResidentCommand;
         private RelayCommand _deleteResidentCommand;
 
-        private ModelRepository _repository = ModelRepository.GetInstance();
-
         [Required(ErrorMessage = "should not be empty")]
-        private string AddResidentUID
+        public string AddResidentUID
         {
             get { return _addResidentUID; }
             set
@@ -36,7 +35,7 @@ namespace WpfMap.ViewModels.Admin
             }
         }
         [Required(ErrorMessage = "should not be empty")]
-        private string AddRoomUID
+        public string AddRoomUID
         {
             get { return _addRoomUID; }
             set
@@ -47,7 +46,7 @@ namespace WpfMap.ViewModels.Admin
             }
         }
         [Required(ErrorMessage = "should not be empty")]
-        private string DeleteResidentUID
+        public string DeleteResidentUID
         {
             get { return _deleteResidentUID; }
             set
@@ -58,7 +57,7 @@ namespace WpfMap.ViewModels.Admin
             }
         }
         [Required(ErrorMessage = "should not be empty")]
-        private string DeleteRoomUID
+        public string DeleteRoomUID
         {
             get { return _deleteRoomUID; }
             set
@@ -76,27 +75,36 @@ namespace WpfMap.ViewModels.Admin
                 return _addResidentCommand ??
                     (_addResidentCommand = new RelayCommand(obj => 
                     {
-                        Room room = _repository.Rooms.Find(r => r.UID == AddRoomUID);
-                        Resident resident = _repository.Residents.Find(r => r.UID == AddResidentUID);
-                        if (room != null && resident != null)
+                        using (MainContext context = new MainContext())
                         {
-                            if (room.RoomResidents.Find(r => r.Resident.Equals(resident)) == null)
+                            var roomResidentRep = new RoomResidentRepository(context);
+                            var roomRep = new RoomRepository(context);
+                            var residentRep = new ResidentRepository(context);
+                            Room room = roomRep.List(r => r.UID == DeleteRoomUID).FirstOrDefault();
+                            Resident resident = residentRep.List(r => r.UID == DeleteResidentUID).FirstOrDefault();
+                            if (room != null && resident != null)
                             {
-                                RoomResident roomResident = new RoomResident
+                                if (room.RoomResidents.Find(r => r.Resident.Equals(resident)) == null)
                                 {
-                                    Room = room,
-                                    Resident = resident
-                                };
-                                room.RoomResidents.Add(roomResident);
+                                    RoomResident roomResident = new RoomResident
+                                    {
+                                        Room = room,
+                                        Resident = resident
+                                    };
+                                    roomResidentRep.Add(roomResident);
+                                    roomRep.Edit(room);
+                                    residentRep.Edit(resident);
+                                    context.SaveChanges();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Room already contains such resident");
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Room already contains such resident");
+                                MessageBox.Show("Room or Resident not found");
                             }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Room or Resident not found");
                         }
                     }));
             }
@@ -108,27 +116,32 @@ namespace WpfMap.ViewModels.Admin
                 return _deleteResidentCommand ??
                     (_deleteResidentCommand = new RelayCommand(obj =>
                     {
-                        Room room = _repository.Rooms.Find(r => r.UID == DeleteRoomUID);
-                        Resident resident = _repository.Residents.Find(r => r.UID == DeleteResidentUID);
-                        if (room != null && resident != null)
+                        using (MainContext context = new MainContext())
                         {
-                            if (room.RoomResidents.Find(r => r.Resident.Equals(resident)) != null)
+                            var roomResidentRep = new RoomResidentRepository(context);
+                            var roomRep = new RoomRepository(context);
+                            var residentRep = new ResidentRepository(context);
+                            Room room = roomRep.List(r => r.UID == DeleteRoomUID).FirstOrDefault();
+                            Resident resident = residentRep.List(r => r.UID == DeleteResidentUID).FirstOrDefault();
+                            if (room != null && resident != null)
                             {
-                                RoomResident roomResident = new RoomResident
+                                RoomResident roomResident = room.RoomResidents.Find(r => r.Resident.Equals(resident));
+                                if (roomResident != null)
                                 {
-                                    Room = room,
-                                    Resident = resident
-                                };
-                                room.RoomResidents.Remove(roomResident);
+                                    roomResidentRep.Delete(roomResident);
+                                    roomRep.Edit(room);
+                                    residentRep.Edit(resident);
+                                    context.SaveChanges();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Room doesn't contains such resident");
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Room doesn't contains such resident");
+                                MessageBox.Show("Room or Resident not found");
                             }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Room or Resident not found");
                         }
                     }));
             }

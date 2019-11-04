@@ -6,7 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfMap.Model.Entities;
+using WpfMap.Models.Contexts;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 
 namespace WpfMap.ViewModels.User
 {
@@ -74,26 +76,37 @@ namespace WpfMap.ViewModels.User
                 return _searchByNameCommand ??
                     (_searchByNameCommand = new RelayCommand(obj =>
                     {
-                        string name = ResidentName?.Trim();
-                        if (string.IsNullOrEmpty(name))
+                        using (MainContext context = new MainContext())
                         {
-                            Selection = Room.RoomResidents.Select(r => r.Resident).ToList();
+                            var roomResidentRep = new RoomResidentRepository(context);
+                            string name = ResidentName?.Trim();
+                            if (string.IsNullOrEmpty(name))
+                            {
+                                Selection = context.RoomResidents.Include("Room").Include("Resident")
+                                .Where(rr => rr.RoomId == Room.Id).Select(r => r.Resident).ToList();
+                            }
+                            else
+                            {
+                                Selection = context.RoomResidents.Include("Room").Include("Resident")
+                                .Where(rr => rr.RoomId == Room.Id).Select(r => r.Resident)
+                                .Where(s => s.Name.Contains(name)).ToList();
+                            }
+                            Selection.Sort((r1, r2) => r1.Name.CompareTo(r2.Name));
                         }
-                        else
-                        {
-                            Selection = Room.RoomResidents.Select(r => r.Resident)
-                                            .Where(s => s.Name.Contains(name)).ToList();
-                        }
-                        Selection.Sort((r1, r2) => r1.Name.CompareTo(r2.Name));
                     }));
             }
         }
 
         public RoomViewModel(Room room)
         {
-            Room = room;
-            Selection = Room.RoomResidents.Select(r => r.Resident).ToList();
-            Selection.Sort((r1, r2) => r1.Name.CompareTo(r2.Name));
+            using (MainContext context = new MainContext())
+            {
+                var roomResidentRep = new RoomResidentRepository(context);
+                Room = room;
+                Selection = context.RoomResidents.Include("Room").Include("Resident")
+                .Where(rr => rr.RoomId == Room.Id).Select(r => r.Resident).ToList();
+                Selection.Sort((r1, r2) => r1.Name.CompareTo(r2.Name));
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

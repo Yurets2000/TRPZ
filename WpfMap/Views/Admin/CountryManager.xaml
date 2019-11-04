@@ -22,9 +22,6 @@
                 <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=countrySelector}" Value="{x:Null}">
                     <Setter Property="IsEnabled" Value="false" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=editCountryCapital}" Value="{x:Null}">
-                    <Setter Property="IsEnabled" Value="false" />
-                </DataTrigger>
                 <DataTrigger Binding="{Binding ElementName=editCountryName, Path=(Validation.HasError)}" Value="true">
                     <Setter Property="IsEnabled" Value="false" />
                 </DataTrigger>
@@ -69,8 +66,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="45"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="5"/>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="5"/>
@@ -93,11 +88,9 @@
             </ComboBox>
             <Label Grid.Row="3" Grid.Column="0" Content="Name: " FontWeight="Medium" Margin="20,0,0,0"/>
             <TextBox Name="editCountryName" Text="{Binding EditCountryName, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Grid.Row="3" Grid.Column="1" Margin="0,0,20,0"/>
-            <Label Grid.Row="5" Grid.Column="0" Content="Capital: " FontWeight="Medium" Margin="20,0,0,0"/>
-            <ComboBox Name="editCountryCapital" ItemsSource="{Binding SelectedCountry.Cities, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding EditCountryCapital, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Grid.Row="5" Grid.Column="1" Margin="0,0,20,0" DisplayMemberPath="Name"/>
-            <Button Command="{Binding EditCountryCommand}" Grid.Row="7" Grid.Column="1" Content="Edit" Margin="0,0,20,0" Style="{StaticResource EditDeleteButtonStyle}"/>
-            <Button Command="{Binding DeleteCountryCommand}"  Grid.Row="9" Grid.Column="1" Content="Delete" Margin="0,0,20,0" Style="{StaticResource EditDeleteButtonStyle}"/>
-            <Button Command="{Binding OpenCityManagerCommand}" Grid.Row="11" Grid.Column="1" Content="Open City Manager" Margin="0,0,20,0" Style="{StaticResource OpenManagerButtonStyle}"/>
+            <Button Command="{Binding EditCountryCommand}" Grid.Row="5" Grid.Column="1" Content="Edit" Margin="0,0,20,0" Style="{StaticResource EditDeleteButtonStyle}"/>
+            <Button Command="{Binding DeleteCountryCommand}"  Grid.Row="7" Grid.Column="1" Content="Delete" Margin="0,0,20,0" Style="{StaticResource EditDeleteButtonStyle}"/>
+            <Button Command="{Binding OpenCityManagerCommand}" Grid.Row="9" Grid.Column="1" Content="Open City Manager" Margin="0,0,20,0" Style="{StaticResource OpenManagerButtonStyle}"/>
         </Grid>
     </Grid>
 </Window>

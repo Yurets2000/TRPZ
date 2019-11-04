@@ -7,7 +7,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using WpfMap.Model.Entities;
+using WpfMap.Models.Contexts;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 
 namespace WpfMap.ViewModels.Admin
 {
@@ -77,12 +79,21 @@ namespace WpfMap.ViewModels.Admin
                 return _addHouseCommand ??
                     (_addHouseCommand = new RelayCommand(obj =>
                     {
-                        House house = new House
+                        using (MainContext context = new MainContext())
                         {
-                            Address = AddHouseAddress
-                        };
-                        Street.Houses.Add(house);
-                        Houses = new ObservableCollection<House>(Street.Houses);
+                            var houseRep = new HouseRepository(context);
+                            var streetRep = new StreetRepository(context);
+                            context.Streets.Attach(Street);
+                            House house = new House
+                            {
+                                Address = AddHouseAddress,
+                                Street = Street
+                            };
+                            houseRep.Add(house);
+                            streetRep.Edit(Street);
+                            context.SaveChanges();
+                            Houses = new ObservableCollection<House>(Street.Houses);
+                        }
                     }));
             }
         }
@@ -104,9 +115,15 @@ namespace WpfMap.ViewModels.Admin
                 return _editHouseCommand ??
                     (_editHouseCommand = new RelayCommand(obj =>
                     {
-                        SelectedHouse.Address = EditHouseAddress;
-                        Houses = new ObservableCollection<House>(Street.Houses);
-                        SelectedHouse = SelectedHouse;
+                        using (MainContext context = new MainContext())
+                        {
+                            var houseRep = new HouseRepository(context);
+                            SelectedHouse.Address = EditHouseAddress;
+                            houseRep.Edit(SelectedHouse);
+                            context.SaveChanges();
+                            Houses = new ObservableCollection<House>(Street.Houses);
+                            SelectedHouse = SelectedHouse;
+                        }
                     }));
             }
         }
@@ -117,8 +134,16 @@ namespace WpfMap.ViewModels.Admin
                 return _deleteHouseCommand ??
                     (_deleteHouseCommand = new RelayCommand(obj =>
                     {
-                        Street.Houses.Remove(SelectedHouse);
-                        Houses = new ObservableCollection<House>(Street.Houses);
+                        using (MainContext context = new MainContext())
+                        {
+                            var houseRep = new HouseRepository(context);
+                            var streetRep = new StreetRepository(context);
+                            context.Streets.Attach(Street);
+                            houseRep.Delete(SelectedHouse);
+                            streetRep.Edit(Street);
+                            context.SaveChanges();
+                            Houses = new ObservableCollection<House>(Street.Houses);
+                        }
                     }));
             }
         }
@@ -147,8 +172,12 @@ namespace WpfMap.ViewModels.Admin
 
         public HouseManagerViewModel(Street street)
         {
-            Street = street;
-            Houses = new ObservableCollection<House>(Street.Houses);
+            using (MainContext context = new MainContext())
+            {
+                Street = street;
+                context.Streets.Attach(Street);
+                Houses = new ObservableCollection<House>(Street.Houses);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

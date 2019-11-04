@@ -52,7 +52,7 @@
             <TextBox Name="deleteRoomUID" Text="{Binding DeleteRoomUID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Select Resident: " FontWeight="Medium" Margin="20,0,0,0"/>
             <TextBox Name="deleteResidentUID" Text="{Binding DeleteResidentUID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,20,0"/>
-            <Button Command="{Binding }" Grid.Row="5" Grid.Column="1" Content="Delete" Margin="0,0,20,0"/>
+            <Button Command="{Binding DeleteResidentCommand}" Grid.Row="5" Grid.Column="1" Content="Delete" Margin="0,0,20,0"/>
         </Grid>
     </Grid>
 </Window>

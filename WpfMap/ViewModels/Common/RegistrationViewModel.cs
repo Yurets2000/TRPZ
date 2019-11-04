@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using WpfMap.Model.Repositories;
+using WpfMap.Models.Contexts;
+using WpfMap.Models.Repositories;
 
 namespace WpfMap.ViewModels.Common
 {
@@ -51,16 +52,26 @@ namespace WpfMap.ViewModels.Common
                 return _registerCommand ??
                     (_registerCommand = new RelayCommand(obj =>
                     {
-                        Model.Entities.User user = UserRepository.GetInstance().SearchUser(Username, Password);
-                        if (user == null)
+                        using (MainContext context = new MainContext())
                         {
-                            Model.Entities.User newUser = new Model.Entities.User(Username, Password, false);
-                            UserRepository.GetInstance().Users.Add(newUser);
-                            ClosingRequest?.Invoke(this, EventArgs.Empty);
-                        }
-                        else
-                        {
-                            MessageBox.Show("User with such login and password already registered");
+                            var userRepository = new UserRepository(context);
+                            Models.Entities.User user = userRepository.List(u => (u.Login == Username && u.Password == Password)).FirstOrDefault();
+                            if (user == null)
+                            {
+                                Models.Entities.User newUser = new Models.Entities.User
+                                {
+                                    Login = Username,
+                                    Password = Password,
+                                    Admin = false
+                                };
+                                userRepository.Add(newUser);
+                                context.SaveChanges();
+                                ClosingRequest?.Invoke(this, EventArgs.Empty);
+                            }
+                            else
+                            {
+                                MessageBox.Show("User with such login and password already registered");
+                            }
                         }
                     }));
             }

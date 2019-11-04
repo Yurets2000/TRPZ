@@ -11,8 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfMap.Model.Entities;
-using WpfMap.Model.Repositories;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 using WpfMap.ViewModels.User;
 
 namespace WpfMap

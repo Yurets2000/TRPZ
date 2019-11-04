@@ -6,12 +6,13 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using WpfMap.Model.Repositories;
+using WpfMap.Models.Repositories;
 using WpfMap.Views.Common;
-using WpfMap.Model.Entities;
+using WpfMap.Models.Entities;
 using System.Windows;
-using WpfMap.Model;
+using WpfMap.Models;
 using System.Windows.Controls;
+using WpfMap.Models.Contexts;
 
 namespace WpfMap.ViewModels.Common
 {
@@ -67,25 +68,29 @@ namespace WpfMap.ViewModels.Common
                 return _loginCommand ??
                     (_loginCommand = new RelayCommand(obj =>
                     {
-                        Model.Entities.User user = UserRepository.GetInstance().SearchUser(Username, Password);
-                        if (user == null)
+                        using (MainContext context = new MainContext())
                         {
-                            MessageBox.Show("There is no such user!");
-                        }
-                        else
-                        {
-                            ApplicationContext.CurrentUser = user;
-                            if (user.Admin)
+                            var userRepository = new UserRepository(context);
+                            Models.Entities.User user = userRepository.List(u => (u.Login == Username && u.Password == Password)).FirstOrDefault();
+                            if (user == null)
                             {
-                                AdminPage adminPage = new AdminPage();
-                                adminPage.Show();
+                                MessageBox.Show("There is no such user!");
                             }
                             else
                             {
-                                UserPage userPage = new UserPage();
-                                userPage.Show();
+                                ApplicationContext.CurrentUser = user;
+                                if (user.Admin)
+                                {
+                                    AdminPage adminPage = new AdminPage();
+                                    adminPage.Show();
+                                }
+                                else
+                                {
+                                    UserPage userPage = new UserPage();
+                                    userPage.Show();
+                                }
+                                ClosingRequest?.Invoke(this, EventArgs.Empty);
                             }
-                            ClosingRequest?.Invoke(this, EventArgs.Empty);
                         }
                     }));
             }

@@ -7,8 +7,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfMap.Model.Entities;
-using WpfMap.Model.Repositories;
+using WpfMap.Models.Contexts;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 
 namespace WpfMap.ViewModels.User
 {
@@ -77,16 +78,20 @@ namespace WpfMap.ViewModels.User
                 return _searchByNameCommand ??
                     (_searchByNameCommand = new RelayCommand(obj =>
                     {
-                        string name = CountryName?.Trim();
-                        if (string.IsNullOrEmpty(name))
+                        using (MainContext context = new MainContext())
                         {
-                            Selection = ModelRepository.GetInstance().Countries;
+                            var countryRep = new CountryRepository(context);
+                            string name = CountryName?.Trim();
+                            if (string.IsNullOrEmpty(name))
+                            {
+                                Selection = countryRep.List();
+                            }
+                            else
+                            {
+                                Selection = countryRep.List(c => c.Name.Contains(name));
+                            }
+                            Selection.Sort((c1, c2) => c1.Name.CompareTo(c2.Name));
                         }
-                        else
-                        {
-                            Selection = ModelRepository.GetInstance().Countries.Where(c => c.Name.Contains(name)).ToList();
-                        }
-                        Selection.Sort((c1, c2) => c1.Name.CompareTo(c2.Name));
                     }));
             }
         }
@@ -106,8 +111,12 @@ namespace WpfMap.ViewModels.User
 
         public UserViewModel()
         {
-            Selection = ModelRepository.GetInstance().Countries;
-            Selection.Sort((c1, c2) => c1.Name.CompareTo(c2.Name));
+            using (MainContext context = new MainContext())
+            {
+                var countryRep = new CountryRepository(new MainContext());
+                Selection = countryRep.List();
+                Selection.Sort((c1, c2) => c1.Name.CompareTo(c2.Name));
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

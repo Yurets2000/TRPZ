@@ -7,8 +7,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using WpfMap.Model.Entities;
-using WpfMap.Model.Repositories;
+using WpfMap.Models.Contexts;
+using WpfMap.Models.Entities;
+using WpfMap.Models.Repositories;
 
 namespace WpfMap.ViewModels.Admin
 {
@@ -103,13 +104,22 @@ namespace WpfMap.ViewModels.Admin
                 return _addCityCommand ??
                     (_addCityCommand = new RelayCommand(obj =>
                     {
-                        City city = new City
+                        using (MainContext context = new MainContext())
                         {
-                            Name = AddCityName,
-                            Area = float.Parse(AddCityArea)
-                        };
-                        Country.Cities.Add(city);
-                        Cities = new ObservableCollection<City>(Country.Cities);
+                            var cityRep = new CityRepository(context);
+                            var countryRep = new CountryRepository(context);
+                            context.Countries.Attach(Country);
+                            City city = new City
+                            {
+                                Name = AddCityName,
+                                Area = float.Parse(AddCityArea),
+                                Country = Country
+                            };
+                            cityRep.Add(city);
+                            countryRep.Edit(Country);
+                            context.SaveChanges();
+                            Cities = new ObservableCollection<City>(Country.Cities);
+                        }
                     }));
             }
         }
@@ -132,10 +142,16 @@ namespace WpfMap.ViewModels.Admin
                 return _editCityCommand ??
                     (_editCityCommand = new RelayCommand(obj =>
                     {
-                        SelectedCity.Name = EditCityName;
-                        SelectedCity.Area = float.Parse(EditCityArea);
-                        Cities = new ObservableCollection<City>(Country.Cities);
-                        SelectedCity = SelectedCity;
+                        using (MainContext context = new MainContext())
+                        {
+                            var cityRep = new CityRepository(context);
+                            SelectedCity.Name = EditCityName;
+                            SelectedCity.Area = float.Parse(EditCityArea);
+                            cityRep.Edit(SelectedCity);
+                            context.SaveChanges();
+                            Cities = new ObservableCollection<City>(Country.Cities);
+                            SelectedCity = SelectedCity;
+                        }
                     }));
             }
         }
@@ -146,8 +162,16 @@ namespace WpfMap.ViewModels.Admin
                 return _deleteCityCommand ??
                     (_deleteCityCommand = new RelayCommand(obj =>
                     {
-                        Country.Cities.Remove(SelectedCity);
-                        Cities = new ObservableCollection<City>(Country.Cities);
+                        using (MainContext context = new MainContext())
+                        {
+                            var cityRep = new CityRepository(context);
+                            var countryRep = new CountryRepository(context);
+                            context.Countries.Attach(Country);
+                            cityRep.Delete(SelectedCity);
+                            countryRep.Edit(Country);
+                            context.SaveChanges();
+                            Cities = new ObservableCollection<City>(Country.Cities);
+                        }
                     }));
             }
         }
@@ -176,8 +200,12 @@ namespace WpfMap.ViewModels.Admin
 
         public CityManagerViewModel(Country country)
         {
-            Country = country;
-            Cities = new ObservableCollection<City>(Country.Cities);
+            using (MainContext context = new MainContext())
+            {
+                Country = country;
+                context.Countries.Attach(Country);
+                Cities = new ObservableCollection<City>(Country.Cities);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
