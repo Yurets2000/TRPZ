@@ -6,9 +6,9 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:WpfMap"
         mc:Ignorable="d"
-        Title="UserPage" Height="480" Width="640">
+        Title="UserPage" Height="480" Width="640" Background="Bisque" Style="{StaticResource AnimatedWindow}">
     <Grid x:Name="LayoutRoot">
-        <DockPanel LastChildFill="False" Background="Bisque">
+        <DockPanel LastChildFill="False">
             <Grid Width="250" DockPanel.Dock="Left">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="75" />
@@ -30,7 +30,25 @@
                     </i:Interaction.Triggers>
                 </TextBox>
                 <Button Content="Open Login Page" Command="{Binding OpenLoginPageCommand}" Grid.Row="3" Grid.Column="0" Margin="10, 5" Template="{StaticResource RoundedButtonTemplate}" Style="{StaticResource DefaultButtonStyle}"/>
-                <Image Source="D:/profiles/map.png" Grid.Row="4" Grid.Column="0" Height="150" Margin="15,50"/>
+                <Image Source="D:/profiles/map.png" Grid.Row="4" Grid.Column="0" Width="150" Height="150" Margin="15,50" RenderTransformOrigin="0.5, 0.5">
+                    <Image.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="ImageRotation" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:3"/>
+                                    <DoubleAnimation Storyboard.TargetName="ImageScaling" Storyboard.TargetProperty="ScaleX" To="0" Duration="0:0:1.5" AutoReverse="True"/>
+                                    <DoubleAnimation Storyboard.TargetName="ImageScaling" Storyboard.TargetProperty="ScaleY" To="0" Duration="0:0:1.5" AutoReverse="True"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Image.Triggers>
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform x:Name="ImageRotation"/>
+                            <ScaleTransform x:Name="ImageScaling"/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
             </Grid>
             <StackPanel>
                 <ListView x:Name="countries" ItemsSource="{Binding Selection}" SelectedItem="{Binding SelectedCountry}" Width="390" VerticalAlignment="Top" DockPanel.Dock="Right" Height="350">
